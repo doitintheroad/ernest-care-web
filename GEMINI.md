@@ -146,6 +146,7 @@ If a device would look at home on a Series B marketing site, it does not ship.
 - The visible headline is the `<h1>`.
 - Booking links that open Cal.com: `target="_blank" rel="noopener"` plus `js-booking`.
 - After editing `site.js`, run `scratch/validate_js.py` if present; otherwise a syntax check that the file parses.
+- **Mandatory Git Version Control:** Every update to `ernest.care/` MUST be committed to git immediately upon completion with a descriptive commit message (`feat(...)`, `fix(...)`) and tagged at major milestones. Never leave uncommitted changes at session close.
 
 ---
 
