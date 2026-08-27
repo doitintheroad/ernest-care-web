@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 Not Found | Ernest Care</title>
+<link rel="canonical" href="https://ernest.care/404.html">
+<meta name="theme-color" content="#F6F3EA">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh; justify-content: center; align-items: center; text-align: center; background-color: var(--paper);">
+
+  <div class="wordmark" style="font-size: 32px; margin-bottom: 24px; color: var(--ink);">
+    <svg class="flourish" width="30" height="20" viewBox="0 0 30 20" aria-hidden="true"><path d="M2 16 Q 10 2, 15 12 T 28 6"/></svg>
+    Ernest
+  </div>
+  
+  <h1 style="font-size: 48px; margin-bottom: 16px; color: var(--ink);">404.</h1>
+  <p style="font-family: 'Public Sans', sans-serif; font-size: 18px; color: var(--ink-soft); max-width: 500px; margin: 0 auto 32px auto; line-height: 1.6;">
+    This page doesn't exist. But if you're navigating a dead end, feeling stuck, or facing unexpected friction—you're in exactly the right place.
+  </p>
+  
+  <a href="/" class="btn">Return to Homepage</a>
+
+</body>
+</html>

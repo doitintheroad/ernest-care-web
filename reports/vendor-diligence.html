@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vendor Diligence & Privacy Protocol | Ernest Care</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1B1814;
+    --ink-soft: #443D35;
+    --ink-muted: #73695D;
+    --paper: #F7F4EC;
+    --paper-deep: #ECE6D8;
+    --paper-warm: #E3DBC9;
+    --white: #FFFFFF;
+    --ledger: #23382C;
+    --ledger-deep: #16241C;
+    --brass: #8C6631;
+    --brass-bright: #C59B5F;
+    --rule: #DDD4C0;
+    --rule-light: #EBE5D6;
+    --radius-sm: 8px;
+    --radius-full: 9999px;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    hyphens: none !important;
+    -webkit-hyphens: none !important;
+  }
+
+  body {
+    margin: 0;
+    background: #E8E2D2;
+    color: var(--ink);
+    font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 14.5px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    padding: 48px 20px;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  .report-page {
+    max-width: 860px;
+    margin: 0 auto;
+    background: var(--white);
+    padding: 72px 84px;
+    box-shadow: 0 20px 50px rgba(27, 24, 20, 0.12);
+    border-top: 6px solid var(--ledger-deep);
+    position: relative;
+  }
+
+  /* Header Branding */
+  .report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid var(--ledger-deep);
+    padding-bottom: 20px;
+    margin-bottom: 36px;
+  }
+
+  .report-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .report-wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .report-submark {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brass);
+  }
+
+  .report-meta-badge {
+    text-align: right;
+    font-size: 10.5px;
+    font-weight: 600;
+    line-height: 1.45;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .report-meta-badge strong {
+    color: var(--ledger);
+  }
+
+  /* Memo Info Grid */
+  .memo-info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 36px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-sm);
+  }
+
+  .memo-info-table td {
+    padding: 10px 18px;
+    font-size: 12.5px;
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .memo-info-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .memo-info-label {
+    width: 160px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brass);
+  }
+
+  .memo-info-val {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* Document Typography */
+  h1.report-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+    margin: 0 0 28px 0;
+    letter-spacing: -0.015em;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ledger-deep);
+    margin: 36px 0 14px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-family: 'Public Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 24px 0 8px 0;
+    letter-spacing: 0.01em;
+  }
+
+  p {
+    margin: 0 0 16px 0;
+    color: var(--ink-soft);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  p strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* Executive Highlight Box with Blueprint Marks */
+  .exec-box {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-sm);
+    padding: 24px 28px;
+    margin: 28px 0;
+    position: relative;
+  }
+
+  .exec-box::before, .exec-box::after {
+    content: "+";
+    position: absolute;
+    font-size: 11px;
+    color: var(--brass-bright);
+    opacity: 0.7;
+  }
+  .exec-box::before { top: 8px; left: 10px; }
+  .exec-box::after { top: 8px; right: 10px; }
+
+  .exec-box-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  /* Metrics Display Grid */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .stat-card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ledger-deep);
+    display: block;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+
+  .stat-desc {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* Comparison & Data Tables */
+  .report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 13px;
+  }
+
+  .report-table th {
+    background: var(--ledger-deep);
+    color: var(--white);
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .report-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--rule-light);
+    color: var(--ink-soft);
+  }
+
+  .report-table tr:nth-child(even) td {
+    background: rgba(247, 244, 236, 0.5);
+  }
+
+  .report-table td strong {
+    color: var(--ink);
+  }
+
+  /* Checklist Items */
+  .audit-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 20px 0;
+  }
+
+  .audit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 18px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-sm);
+  }
+
+  .audit-badge {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--ledger);
+    color: var(--white);
+    flex-shrink: 0;
+  }
+
+  .audit-text strong {
+    display: block;
+    font-size: 13.5px;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .audit-text p {
+    font-size: 12.5px;
+    margin: 0;
+    color: var(--ink-soft);
+  }
+
+  /* Footnotes */
+  .report-footer-notes {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--ink-muted);
+  }
+
+  .report-footer-notes strong {
+    color: var(--ink);
+  }
+
+  /* Floating Print Action Button */
+  .print-fab {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    background: var(--ledger-deep);
+    color: var(--white);
+    border: 1px solid var(--brass-bright);
+    padding: 14px 28px;
+    border-radius: 9999px;
+    font-family: 'Public Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 12px 32px rgba(22, 36, 28, 0.35);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1000;
+  }
+
+  .print-fab:hover {
+    background: var(--ink);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px rgba(22, 36, 28, 0.45);
+  }
+
+  /* Print Optimizations */
+  @media print {
+    body {
+      background: white !important;
+      padding: 0 !important;
+      color: black !important;
+    }
+    .report-page {
+      box-shadow: none !important;
+      padding: 0 !important;
+      max-width: 100% !important;
+      border-top: none !important;
+    }
+    .print-fab {
+      display: none !important;
+    }
+    .exec-box, .stat-card, .audit-item, .memo-info-table {
+      break-inside: avoid;
+    }
+  }
+</style>
+
+</head>
+<body>
+
+<button class="print-fab" onclick="window.print();" aria-label="Print or Save as Executive PDF">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Print / Export as Executive PDF &rarr;
+</button>
+
+<div class="report-page">
+  <div class="report-header">
+    <div class="report-brand">
+      <div class="report-wordmark">
+        <svg class="flourish" width="28" height="18" viewBox="0 0 30 20" aria-hidden="true"><path d="M2 16 Q 10 2, 15 12 T 28 6" stroke="var(--brass)" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>
+        Ernest
+      </div>
+      <div class="report-submark">Bespoke Clinical Advisory &middot; Legal Compliance Monograph</div>
+    </div>
+    <div class="report-meta-badge">
+      <strong>Statutory Privacy Protocol</strong><br>
+      CRPO Practice #17513 &middot; PHIPA Custody
+    </div>
+  </div>
+
+  <table class="memo-info-table">
+    <tr>
+      <td class="memo-info-label">Document Purpose</td>
+      <td class="memo-info-val">Vendor Diligence, Data Isolation &amp; Statutory Custody Protocol</td>
+    </tr>
+    <tr>
+      <td class="memo-info-label">Target Reviewer</td>
+      <td class="memo-info-val">General Counsel, Chief Legal Officer &amp; Privacy Committee</td>
+    </tr>
+    <tr>
+      <td class="memo-info-label">Clinical Entity</td>
+      <td class="memo-info-val">Ernest Care (Clinical Director: Daniel Cooper, Registered Psychotherapist)</td>
+    </tr>
+    <tr>
+      <td class="memo-info-label">Regulatory Mandate</td>
+      <td class="memo-info-val">Personal Health Information Protection Act (PHIPA, 2004) &middot; CRPO Reg #17513</td>
+    </tr>
+  </table>
+
+  <h1 class="report-title">Vendor Compliance &amp; Privacy Isolation Architecture</h1>
+
+  <div class="exec-box">
+    <span class="exec-box-title">Legal Counsel Summary &amp; PHIPA Isolation</span>
+    <p style="margin:0;">Ernest Care operates as a regulated clinical practice, not a software broker. Under Ontario's <em>PHIPA, 2004</em>, Daniel Cooper, RP serves as the sole <strong>Health Information Custodian (HIC)</strong>. All clinical session notes, diagnoses, and attendance records are protected under statutory privilege. Zero Personal Health Information (PHI) is ever disclosed, billed, or shared with the client firm.</p>
+  </div>
+
+  <h2>1. The Corporate Clinical Air-Gap Architecture</h2>
+  <p>To eliminate privacy friction and shield the firm from employment liability, our retainer establishes a complete operational air-gap:</p>
+
+  <div class="audit-checklist">
+    <div class="audit-item">
+      <span class="audit-badge">Node 01</span>
+      <div class="audit-text">
+        <strong>Direct, Encrypted Partner Booking</strong>
+        <p>Eligible leadership cohort members book sessions directly through a private, encrypted portal. No HR triage, approval tickets, or internal referral routing.</p>
+      </div>
+    </div>
+    <div class="audit-item">
+      <span class="audit-badge">Node 02</span>
+      <div class="audit-text">
+        <strong>Sole Health Information Custodian (HIC) Vault</strong>
+        <p>All clinical records reside in an isolated, encrypted, PIPEDA/PHIPA-compliant health record repository under the statutory custody of Daniel Cooper, RP.</p>
+      </div>
+    </div>
+    <div class="audit-item">
+      <span class="audit-badge">Node 03</span>
+      <div class="audit-text">
+        <strong>Blind Net-15 Corporate Invoicing</strong>
+        <p>Invoices are billed as a flat monthly retainer. The firm receives zero names, zero session counts per person, and zero clinical diagnoses.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>2. Statutory Privilege &amp; Subpoena Resistance</h2>
+  <p>Unlike corporate executive coaches or unregulated performance consultants—who carry zero statutory privacy and whose notes are fully discoverable in litigation—Ernest Care clinicians are regulated health professionals under the <em>Psychotherapy Act, 2007</em>.</p>
+  <ul>
+    <li><strong>Discovery Insulation:</strong> Clinical therapy records are governed by common-law Wigmore privilege criteria and strict PHIPA confidentiality protections.</li>
+    <li><strong>Mandatory Duty-to-Warn Boundaries:</strong> As with all regulated Ontario health professionals, statutory disclosure exceptions exist solely under immediate risk of severe bodily harm, child protection statutes, or court-ordered subpoena following formal judicial privilege review.</li>
+  </ul>
+
+  <h2>3. Anonymized Telemetry Standards</h2>
+  <p>For client firms requiring board-level reporting, Ernest Care provides quarterly aggregate reports subject to strict threshold rules:</p>
+  <ul>
+    <li><strong>Minimum Cohort Threshold:</strong> Aggregate utilization data is only reported for cohorts with <strong>n &ge; 5</strong> eligible participants to prevent re-identification.</li>
+    <li><strong>Metric Scope:</strong> Telemetry is strictly limited to aggregate capacity utilization percentages and general workshop attendance numbers.</li>
+  </ul>
+
+  <div class="report-footer-notes">
+    <strong>Statutory Authority &amp; References:</strong> <em>Personal Health Information Protection Act, 2004, S.O. 2004, c. 3, Sched. A</em>; <em>Psychotherapy Act, 2007, S.O. 2007, c. 10, Sched. R</em>; College of Registered Psychotherapists of Ontario <em>Professional Practice Standards (Standard 3.1: Confidentiality)</em>.
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partnership Liability Audit | Ernest Care</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1B1814;
+    --ink-soft: #443D35;
+    --ink-muted: #73695D;
+    --paper: #F7F4EC;
+    --paper-deep: #ECE6D8;
+    --paper-warm: #E3DBC9;
+    --white: #FFFFFF;
+    --ledger: #23382C;
+    --ledger-deep: #16241C;
+    --brass: #8C6631;
+    --brass-bright: #C59B5F;
+    --rule: #DDD4C0;
+    --rule-light: #EBE5D6;
+    --radius-sm: 8px;
+    --radius-full: 9999px;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    hyphens: none !important;
+    -webkit-hyphens: none !important;
+  }
+
+  body {
+    margin: 0;
+    background: #E8E2D2;
+    color: var(--ink);
+    font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 14.5px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    padding: 48px 20px;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  .report-page {
+    max-width: 860px;
+    margin: 0 auto;
+    background: var(--white);
+    padding: 72px 84px;
+    box-shadow: 0 20px 50px rgba(27, 24, 20, 0.12);
+    border-top: 6px solid var(--ledger-deep);
+    position: relative;
+  }
+
+  /* Header Branding */
+  .report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid var(--ledger-deep);
+    padding-bottom: 20px;
+    margin-bottom: 36px;
+  }
+
+  .report-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .report-wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .report-submark {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brass);
+  }
+
+  .report-meta-badge {
+    text-align: right;
+    font-size: 10.5px;
+    font-weight: 600;
+    line-height: 1.45;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .report-meta-badge strong {
+    color: var(--ledger);
+  }
+
+  /* Memo Info Grid */
+  .memo-info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 36px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-sm);
+  }
+
+  .memo-info-table td {
+    padding: 10px 18px;
+    font-size: 12.5px;
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .memo-info-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .memo-info-label {
+    width: 160px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brass);
+  }
+
+  .memo-info-val {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* Document Typography */
+  h1.report-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+    margin: 0 0 28px 0;
+    letter-spacing: -0.015em;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ledger-deep);
+    margin: 36px 0 14px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-family: 'Public Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 24px 0 8px 0;
+    letter-spacing: 0.01em;
+  }
+
+  p {
+    margin: 0 0 16px 0;
+    color: var(--ink-soft);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  p strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* Executive Highlight Box with Blueprint Marks */
+  .exec-box {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-sm);
+    padding: 24px 28px;
+    margin: 28px 0;
+    position: relative;
+  }
+
+  .exec-box::before, .exec-box::after {
+    content: "+";
+    position: absolute;
+    font-size: 11px;
+    color: var(--brass-bright);
+    opacity: 0.7;
+  }
+  .exec-box::before { top: 8px; left: 10px; }
+  .exec-box::after { top: 8px; right: 10px; }
+
+  .exec-box-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  /* Metrics Display Grid */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .stat-card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ledger-deep);
+    display: block;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+
+  .stat-desc {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* Comparison & Data Tables */
+  .report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 13px;
+  }
+
+  .report-table th {
+    background: var(--ledger-deep);
+    color: var(--white);
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .report-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--rule-light);
+    color: var(--ink-soft);
+  }
+
+  .report-table tr:nth-child(even) td {
+    background: rgba(247, 244, 236, 0.5);
+  }
+
+  .report-table td strong {
+    color: var(--ink);
+  }
+
+  /* Checklist Items */
+  .audit-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 20px 0;
+  }
+
+  .audit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 18px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-sm);
+  }
+
+  .audit-badge {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--ledger);
+    color: var(--white);
+    flex-shrink: 0;
+  }
+
+  .audit-text strong {
+    display: block;
+    font-size: 13.5px;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .audit-text p {
+    font-size: 12.5px;
+    margin: 0;
+    color: var(--ink-soft);
+  }
+
+  /* Footnotes */
+  .report-footer-notes {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--ink-muted);
+  }
+
+  .report-footer-notes strong {
+    color: var(--ink);
+  }
+
+  /* Floating Print Action Button */
+  .print-fab {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    background: var(--ledger-deep);
+    color: var(--white);
+    border: 1px solid var(--brass-bright);
+    padding: 14px 28px;
+    border-radius: 9999px;
+    font-family: 'Public Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 12px 32px rgba(22, 36, 28, 0.35);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1000;
+  }
+
+  .print-fab:hover {
+    background: var(--ink);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px rgba(22, 36, 28, 0.45);
+  }
+
+  /* Print Optimizations */
+  @media print {
+    body {
+      background: white !important;
+      padding: 0 !important;
+      color: black !important;
+    }
+    .report-page {
+      box-shadow: none !important;
+      padding: 0 !important;
+      max-width: 100% !important;
+      border-top: none !important;
+    }
+    .print-fab {
+      display: none !important;
+    }
+    .exec-box, .stat-card, .audit-item, .memo-info-table {
+      break-inside: avoid;
+    }
+  }
+</style>
+
+</head>
+<body>
+
+<button class="print-fab" onclick="window.print();" aria-label="Print or Save as Executive PDF">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Print / Export as Executive PDF &rarr;
+</button>
+
+<div class="report-page">
+  <div class="report-header">
+    <div class="report-brand">
+      <div class="report-wordmark">
+        <svg class="flourish" width="28" height="18" viewBox="0 0 30 20" aria-hidden="true"><path d="M2 16 Q 10 2, 15 12 T 28 6" stroke="var(--brass)" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>
+        Ernest
+      </div>
+      <div class="report-submark">Bespoke Clinical Advisory &middot; Statutory Risk Audit</div>
+    </div>
+    <div class="report-meta-badge">
+      <strong>Duty-of-Care Assessment</strong><br>
+      WSIB Bill 127 &middot; OHSA s. 32.0.1
+    </div>
+  </div>
+
+  <table class="memo-info-table">
+    <tr>
+      <td class="memo-info-label">Audit Protocol</td>
+      <td class="memo-info-val">Executive Duty-of-Care &amp; Chronic Mental Stress Risk Assessment</td>
+    </tr>
+    <tr>
+      <td class="memo-info-label">Target Reviewer</td>
+      <td class="memo-info-val">Chief Human Resources Officer, Compensation Committee &amp; Risk Officers</td>
+    </tr>
+    <tr>
+      <td class="memo-info-label">Statutory Benchmark</td>
+      <td class="memo-info-val">Ontario <em>Workplace Safety and Insurance Act</em> (Bill 127: Chronic Mental Stress)</td>
+    </tr>
+    <tr>
+      <td class="memo-info-label">Audit Outcome</td>
+      <td class="memo-info-val">5-Point Structural Risk Mitigation Model for High-Leverage Partnerships</td>
+    </tr>
+  </table>
+
+  <h1 class="report-title">Partnership Liability Audit: Mitigating Duty-of-Care Exposure</h1>
+
+  <div class="exec-box">
+    <span class="exec-box-title">Statutory Exposure Diagnostic</span>
+    <p style="margin:0;">Under Ontario's <em>WSIB Bill 127</em> and <em>OHSA s. 32.0.1</em>, employers carry an affirmative legal duty to mitigate chronic psychological injury resulting from sustained workplace demands. Providing a generic EAP that leadership refuses to use does not constitute a defensible duty-of-care posture. A clinical carve-out provides documented, proactive infrastructure.</p>
+  </div>
+
+  <h2>The 5-Point Structural Risk Assessment</h2>
+  <div class="audit-checklist">
+    <div class="audit-item">
+      <span class="audit-badge" style="background:#8C6631;">Point 01</span>
+      <div class="audit-text">
+        <strong>Intake Velocity &amp; Access Barrier Exposure</strong>
+        <p><em>Risk:</em> 3-to-4 week EAP intake queues result in unmanaged acute stress escalating into formal medical leaves.<br>
+        <em>Mitigation:</em> Guaranteed 48-business-hour intake SLA on Core and Enterprise retainers.</p>
+      </div>
+    </div>
+
+    <div class="audit-item">
+      <span class="audit-badge" style="background:#8C6631;">Point 02</span>
+      <div class="audit-text">
+        <strong>Privacy-Induced Underutilization Exposure</strong>
+        <p><em>Risk:</em> Senior partners avoid enterprise benefits out of fear that claims bleed into partnership reviews.<br>
+        <em>Mitigation:</em> Complete statutory PHIPA isolation with direct portal access and blind billing.</p>
+      </div>
+    </div>
+
+    <div class="audit-item">
+      <span class="audit-badge" style="background:#8C6631;">Point 03</span>
+      <div class="audit-text">
+        <strong>Provider Competence &amp; Context Mismatch</strong>
+        <p><em>Risk:</em> Unqualified trainee networks give advice uncalibrated to high-stakes billable hour or board pressure.<br>
+        <em>Mitigation:</em> Named Registered Psychotherapist with extensive professional services context expertise.</p>
+      </div>
+    </div>
+
+    <div class="audit-item">
+      <span class="audit-badge" style="background:#8C6631;">Point 04</span>
+      <div class="audit-text">
+        <strong>Arbitrary Visit Caps (Token Allotment Failure)</strong>
+        <p><em>Risk:</em> 3-to-6 visit caps terminate care prematurely, stranding partners mid-treatment.<br>
+        <em>Mitigation:</em> Dedicated 10-to-20 monthly session banks that flexibly absorb acute workload surges.</p>
+      </div>
+    </div>
+
+    <div class="audit-item">
+      <span class="audit-badge" style="background:#8C6631;">Point 05</span>
+      <div class="audit-text">
+        <strong>Statutory Defensibility &amp; Documentation</strong>
+        <p><em>Risk:</em> Inability to demonstrate proactive employer intervention during WSIB chronic stress claims.<br>
+        <em>Mitigation:</em> Documented enterprise clinical retainer providing standing, accessible infrastructure.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>Conclusion &amp; Board Recommendation</h2>
+  <p>Adopting an executive clinical carve-out closes the legal gap between corporate duty of care and practical benefit utilization. It protects the partnership's balance sheet, defends against WSIB claims, and preserves high-billing executive performance.</p>
+
+  <div class="report-footer-notes">
+    <strong>Legal Reference Citations:</strong> <em>Workplace Safety and Insurance Act, 1997, S.O. 1997, c. 16, Sched. A, s. 13(4)</em> (as amended by Bill 127: Chronic Mental Stress Policy); <em>Occupational Health and Safety Act, R.S.O. 1990, c. O.1, s. 32.0.1</em> (Workplace Harassment &amp; Psychological Health Duties).
+  </div>
+</div>
+
+</body>
+</html>
