@@ -6,6 +6,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [1.6.0] - 2026-08-27
+
+### Major Visual & Architectural Upgrade: Theatrical Executive Vault & Canopy
+- **Unified Dark Obsidian Glass Navigation**:
+  - Rebuilt `<header>` with dark glass `rgba(14, 18, 15, 0.94)` and `backdrop-filter: blur(16px)`, eliminating the previous cream collar above the dark hero.
+  - Wordmark shifted to warm ivory `#F6F3EA` with ochre animated flourish.
+  - Navlinks converted to tracked `IBM Plex Mono` (`0.16em` spacing) in muted ivory with ochre hover state.
+  - Consultation button styled in crisp mono outline (`border: 1px solid rgba(196, 132, 61, 0.45)`).
+  - Mobile menu drawer rebuilt in dark glass with hairline gold dividers.
+- **4-Stage Executive Vault Background Cadence**:
+  - **Module 1 (Hero)**: Atmospheric studio radial spotlight (`#18271F` -> `#111412` -> `#0B0D0B`) with 120px perimeter vignette and outer blueprint corner brackets.
+  - **Module 2 (The 4-Mark Ledger)**: Upgraded from pale paper to medium-dark spruce (`#15241D`) with 1px ochre hairline grid and 48x48 line marks.
+  - **Module 3 (The Air-Gap Vault)**: Deep obsidian statutory data isolation chambers with glowing amber filaments.
+  - **Module 4 (The Tariff Offer)**: Upgraded from light paper to dark executive schedule (`#101411`) with gold rules and Fraunces price numerals.
+  - **Module 5 (The Board Kit)**: Arrives on high-contrast tactile warm paper (`#ECE6D8`), presenting the 3 forwardable monographs as physical paper dossiers.
+- **Architectural Detailing & Tapered Gold Rules**:
+  - Injected 1px tapered gradient hairlines (`.gold-rule`) at all major section thresholds.
+  - Elevated Daniel Cooper's portrait caption into an engraved archival plaque with mono coordinates.
+  - Re-engineered FAQ accordions (`details.faq`) with Fraunces serif questions and minimalist animated `+` / `−` indicators.
+  - Converted the "How We Start" 3-step rail into a clean 1px hairline ledger grid with solid card cells.
+- **Cache Synchronization**: Bumped query parameters to `?v=53` across all HTML files.
+
+---
+
 ## [1.5.0] - 2026-08-27
 
 ### Visual law
