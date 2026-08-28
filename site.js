@@ -229,3 +229,110 @@
   // Run on initial load
   onScroll();
 })();
+
+
+/* ==========================================================================
+   Apple-Grade Kinetic Hero Engine: Full-Width Right-to-Left Slide + Staggered Subtext Fade
+   ========================================================================== */
+(function initKineticHero() {
+  const track = document.querySelector('.hero-scroll-track');
+  const container = document.querySelector('.hero-choreography');
+  const copyStage = document.querySelector('.hero-copy-stage');
+  const h1 = document.querySelector('.hero-display');
+  const subtextStage = document.querySelector('.hero-subtext-stage');
+  const specStage = document.querySelector('.hero-spec-stage');
+  const cue = document.querySelector('.hero-scroll-cue');
+
+  if (!track || !container || !copyStage || !h1 || !subtextStage || !specStage) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) {
+    h1.style.transform = 'none';
+    subtextStage.style.opacity = '1';
+    subtextStage.style.transform = 'none';
+    subtextStage.style.pointerEvents = 'auto';
+    specStage.style.opacity = '1';
+    specStage.style.transform = 'none';
+    specStage.style.filter = 'none';
+    specStage.style.pointerEvents = 'auto';
+    return;
+  }
+
+  function updateChoreography() {
+    if (window.innerWidth <= 960) {
+      h1.style.transform = '';
+      subtextStage.style.transform = '';
+      subtextStage.style.opacity = '';
+      subtextStage.style.pointerEvents = '';
+      specStage.style.transform = '';
+      specStage.style.opacity = '';
+      specStage.style.filter = '';
+      specStage.style.pointerEvents = '';
+      return;
+    }
+
+    const rect = track.getBoundingClientRect();
+    const totalDist = rect.height - window.innerHeight;
+    if (totalDist <= 0) return;
+
+    // Scroll progress 0.0 -> 1.0
+    const progress = Math.min(Math.max(-rect.top / totalDist, 0), 1);
+
+    // ── STAGE 1: HEADLINE TRANSITIONS FROM FULL-WIDTH RIGHT TO LEFT ANCHOR
+    // Progress 0.0 -> 0.48
+    // Calculate right-offset so the headline begins spanning across the right side of the container
+    const containerW = container.clientWidth;
+    const h1W = h1.clientWidth;
+    // Shift distance: spans from the right edge of container over to 0 (left anchor)
+    const rightSpanShift = Math.max(containerW - h1W, containerW * 0.38);
+
+    const slideProgress = Math.min(progress / 0.48, 1);
+    // Smooth cubic easing curve
+    const slideEase = slideProgress < 0.5
+      ? 2 * slideProgress * slideProgress
+      : -1 + (4 - 2 * slideProgress) * slideProgress;
+
+    // At progress 0: currentShift = rightSpanShift (all the way to the right)
+    // At progress 1 (slide complete): currentShift = 0 (anchored left)
+    const currentShift = rightSpanShift * (1 - slideEase);
+    h1.style.transform = 'translate3d(' + currentShift.toFixed(1) + 'px, 0, 0)';
+
+    // ── STAGE 2: SUBTEXT & SPECIFICATION TABLE FADE IN
+    // Starts only after headline is mostly anchored (progress 0.40 -> 0.88)
+    const fadeProgress = Math.min(Math.max((progress - 0.40) / 0.48, 0), 1);
+    // Smoothstep interpolation
+    const fadeEase = fadeProgress * fadeProgress * (3 - 2 * fadeProgress);
+
+    // Subtext: starts at opacity 0, gently rises 24px into place
+    const subtextY = (1 - fadeEase) * 24;
+    subtextStage.style.opacity = fadeEase.toFixed(3);
+    subtextStage.style.transform = 'translate3d(0, ' + subtextY.toFixed(1) + 'px, 0)';
+    subtextStage.style.pointerEvents = fadeProgress > 0.75 ? 'auto' : 'none';
+
+    // Specification Table: starts at opacity 0, glides in 50px from right, unblurs
+    const tableX = (1 - fadeEase) * 50;
+    const tableBlur = (1 - fadeEase) * 8;
+    specStage.style.opacity = fadeEase.toFixed(3);
+    specStage.style.transform = 'translate3d(' + tableX.toFixed(1) + 'px, 0, 0)';
+    specStage.style.filter = tableBlur > 0.1 ? 'blur(' + tableBlur.toFixed(1) + 'px)' : 'none';
+    specStage.style.pointerEvents = fadeProgress > 0.75 ? 'auto' : 'none';
+
+    // Scroll cue indicator fades out on initial user scroll
+    if (cue) {
+      const cueOpacity = Math.max(0.7 - progress * 4, 0);
+      cue.style.opacity = cueOpacity.toFixed(2);
+    }
+  }
+
+  // Bind passive listeners
+  window.addEventListener('scroll', function() {
+    window.requestAnimationFrame(updateChoreography);
+  }, { passive: true });
+
+  window.addEventListener('resize', function() {
+    window.requestAnimationFrame(updateChoreography);
+  }, { passive: true });
+
+  // Execute immediately on script parse
+  updateChoreography();
+})();
