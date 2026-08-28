@@ -25,29 +25,39 @@ It is not a SaaS landing page, not a wellness app, and not a legal blog.
 
 | Token | Value | Use |
 |---|---|---|
-| `--obsidian` | `#121312` | Dark fields, hero, air-gap, closer |
+| `--obsidian` | `#0E120F` | Deep dark obsidian glass fields, hero, air-gap vault, closer |
 | `--ink` | `#1B1814` | Body type on paper |
 | `--paper` | `#F6F3EA` | Light canvas (social kit cream) |
-| `--paper-deep` | `#ECE6D8` | Alternate light field |
-| `--spruce` | `#1C3F34` | Ledger / primary fill on buttons |
-| `--ochre` | `#C4843D` | Emphasis, marks, rules |
+| `--paper-deep` | `#ECE6D8` | Alternate light field (monographs, board kit) |
+| `--spruce` | `#15241D` | Medium-dark spruce ledger background |
+| `--ochre` | `#C4843D` | Gold rules, accent marks, active highlights |
 | `--brass` / `--brass-bright` | `#8C6631` / `#C59B5F` | Legacy aliases; prefer ochre on dark, brass on paper |
-| `--serif` | **Fraunces** (optical 9–144, 400/600, italic) | Display and headings |
-| `--sans` | **Public Sans** 400/500/600/700 | Body |
-| `--mono` | **IBM Plex Mono** 500/600 | Coordinates, eyebrows, prices-as-data, SLA |
-| `--radius` | **0px** surfaces, **2px** only if a clip is required | Never 8px+. Never 14px. |
-| `--radius-full` | 9999px | Status *dot* only. Not buttons. Not cards. |
+| `--serif` | **Fraunces** (optical 9–144, 400/600, italic) | Display, headings, and delicate specification numerals |
+| `--sans` | **Public Sans** 400/500/600/700 | Body, navigation links, buttons, and UI chrome (natural casing) |
+| `--mono` | **IBM Plex Mono** 500/600 | Technical data only (timestamps, hashes, code). NEVER for UI nav or buttons. |
+| `--radius` | **0px** ledger grids; **6px–8px** floating frosted-glass plates and buttons | Never clunky bubble 14px+ cards. |
+| `--radius-full` | 9999px | Status pulse dots and Apple-style pill action buttons |
 
 One display serif. Do not load Playfair, Bodoni, and Fraunces together. Fraunces is the lock.
 
-### 1.2 Surfaces
+### 1.2 Surfaces & Spatial Engineering (De-Boxing Law)
 
-- Luxury is **material change**, not chrome. Ink field, then paper field, then a 1px rule.
-- **Hairline ledger grids:** parent `gap: 1px; background: var(--rule);` children solid fills. No per-card box-shadow on a cream page.
+- Luxury is **material change and open negative space**, not chrome or border prisons.
+- **De-Boxed Negative Space:**
+  - **BANNED:** Perimeter border fences around sections (`.hero-obsidian::after { inset: 16px; border: ... }`).
+  - **BANNED:** Attaching CAD corner brackets to outer screen perimeters. Content floats with atmospheric room.
+  - Floating specification plates use subtle frosted glass (`background: rgba(18, 25, 20, 0.45); border: 1px solid rgba(196, 132, 61, 0.2); border-radius: 8px; backdrop-filter: blur(16px)`).
+- **The 4-Stage Executive Vault Cadence:**
+  - Module 1 (Hero): Dark Studio Obsidian (`#0E120F`)
+  - Module 2 (`.ledger-strip`): Medium-Dark Spruce (`#15241D`) with 1px ochre hairline grid
+  - Module 3 (`.airgap-field`): Deep Obsidian Statutory Isolation Vault (`#0E100E`)
+  - Module 4 (`.tariff-section`): Dark Executive Schedule (`#101411`) with gold rules
+  - Module 5 (`#diligence-kit`): Tactile Warm Paper (`#ECE6D8`)
+- **Tapered Gold Hairlines:** Major section thresholds are separated by 1px tapered gradient hairlines (`.gold-rule`):
+  `linear-gradient(to right, transparent, rgba(196, 132, 61, 0.45), transparent)`.
+- **Hairline ledger grids:** parent `gap: 1px; background: var(--rule);` children solid fills.
 - **No white tile on cream.** No `--white` rounded rectangle sitting on `--paper`.
-- **No drop-shadow cards.** Elevation is a field change or a 1px rule.
-- Dark fields use **paper/cream type** and **ochre rules**. Never `--ink` type on `--obsidian` or `--ink` backgrounds.
-- Ambient photography (founder plate) is treated: `mix-blend-mode: luminosity` under an obsidian gradient. No bright stock. No illustrations.
+- Dark fields use **paper/cream type** and **ochre rules**. Never `--ink` type on dark backgrounds.
 
 ### 1.3 Marks (iconographic language)
 
@@ -62,17 +72,20 @@ Marks are architectural (vault, filament, ledger ticks, sealed envelope, named f
 - `prefers-reduced-motion: reduce` and `<noscript>` must restore `.reveal`, `.fade-up`, and `.fade-up-stagger` to full opacity.
 - No marquee. No 3D perspective tilt. No button magnetic translate.
 
-### 1.5 Type
+### 1.5 Type (Anti-Blocky Typography Law)
 
-- Eyebrows: `--mono`, `letter-spacing: 0.28em` to `0.35em`, uppercase.
-- Hero display: Fraunces, fluid `clamp()`, italic reserved for the wound / the turn.
-- Coordinates (`01`, `EST.`, SLA): mono.
-- Measure: long, editorial. Do not wrap every paragraph in a card.
+- **UI Navigation & Controls:** Must use **`Public Sans`** (or system-ui), natural sentence/title case, subtle `-0.01em` tracking. **BANNED:** Using `IBM Plex Mono` or mechanical all-caps blocks for navigation links, buttons, or card titles.
+- **Hero Open:** Zero eyebrow above `<h1>`. The page opens immediately with the headline.
+- **Eyebrows & Metadata:** Proportional sans-serif with delicate uppercase tracking (`letter-spacing: 0.1em` to `0.12em`), never typewriter monospace.
+- **Hero Display:** Fraunces, fluid `clamp()`, italic reserved for the wound / the turn.
+- **Specification Numerals:** Elegant Fraunces serif numerals (`01`, `02`, `03`, `04`) in ochre, not chunky typewriter glyphs.
+- **Measure:** Long, editorial, generous negative space. Do not wrap every sentence in a box.
 
 ### 1.6 Controls
 
-- Primary button: spruce (or obsidian) **rectangle**, 1px rule, 0 radius. Not a pill.
-- Secondary: outlined rectangle.
+- Primary hero button: Ochre fill with deep slate text, soft `6px` Apple radius, subtle metallic shadow (`box-shadow: 0 4px 18px rgba(...)`), natural sentence case.
+- Secondary button: Subtle glass blur (`backdrop-filter: blur(12px)`), delicate hairline border, soft `6px` radius.
+- Nav CTA: Apple-style pill button (`border-radius: 9999px; background: rgba(196, 132, 61, 0.12); border: 1px solid rgba(196, 132, 61, 0.35)`).
 - Tooltips / term definitions:
   - Trigger is **ochre**, dashed gold rule, `tabindex="0"`, keyboard and tap.
   - Panel is **paper fill, ink type**, never dark-on-dark.
@@ -84,18 +97,22 @@ Vertical section padding: `clamp(72px, 10vw, 128px)`. Not tight SaaS. Not so vas
 
 ---
 
-## 2. Module order (locked)
+## 2. Module order & Architecture (Ernest Care 2.0 Locked)
 
-Above-the-fold through screen two, in this order. Do not insert toys in front.
+Above-the-fold through screen two, in this order:
 
-1. **Hero — enemy + mechanism + one CTA.** Named problem (partners will not use the EAP). Named mechanism (named RP, session bank, 48 business hours, blind billing). Portrait plate. One booking URL.
-2. **Four-mark ledger** (static): CRPO #17513 · 48-business-hour intake · 10-session bank · blind Net-15. No marquee. No “WSIB Compliant”. No “Zero App Bloat”.
-3. **Air-gap** (visual centerpiece): three chambers, literal void, vault mark. How HR never sees who attended.
-4. **Tariff / offer:** Core $2,200 / 10 / overage $220. Enterprise $4,000 / 20 / overage $200. Workshop $2,500, 100% credited if a retainer is signed within 14 days. SLA service credit if the 48-business-hour window is missed. Bespoke = conversation, no invented public menu.
-5. **Board kit:** three forwardable monographs.
-6. **Fit / enough sessions** (evidence). Flückiger 2018 + Howard 1986. No guaranteed results.
-7. **Duty footnote** (short, legally accurate). WSIA chronic mental stress / OHSA s. 32.0.1 as context, **not** a vendor certification or a legal defense.
-8. **FAQ → how we start → closer.**
+1. **Top Navigation Canopy:** Sticky Dark Obsidian Glass (`top: 0`, blur 16px). Zero top-banner clutter above header.
+2. **Hero (Zero Eyebrows + Pure Typographic Signal):**
+   - **Left Column:** Devastating hook opening directly with `<h1>` (`They will not call the EAP. Build them a door they will use.`), clear lede, dual action buttons. No `.coord` eyebrow preceding `<h1>`. No duplicate micro-badges.
+   - **Right Column:** **Carve-Out Specification Plate** (`.hero-spec-card`) answering Who, SLA, Privacy, and Invoicing.
+   - **Personal Photo Ban:** No personal therapist headshot on the landing hero.
+3. **Four-mark ledger** (static, Medium Spruce `#15241D`): CRPO #17513 · 48-business-hour intake · 10-session bank · blind Net-15.
+4. **Air-gap** (Deep Obsidian Vault `#0E100E`): three chambers, literal void, luminous amber filaments. Chamber 02 anchors Daniel Cooper, RP as sole Health Information Custodian.
+5. **Tariff / offer** (Dark Executive Schedule `#101411`): Core $2,200 / 10 / overage $220. Enterprise $4,000 / 20 / overage $200. Workshop $2,500 credited within 14 days. SLA service credit.
+6. **Board kit** (Tactile Warm Paper `#ECE6D8`): three physical cream paper monographs for executive forwardability.
+7. **Fit / enough sessions** (evidence). Flückiger 2018 + Howard 1986. Highlighting corporate fluency.
+8. **Duty footnote** (short, legally accurate). WSIA chronic mental stress / OHSA s. 32.0.1 as context.
+9. **Architectural FAQ → how we start → closer.** Details accordions with minimalist animated `+` / `−` indicators.
 
 **Parked (do not restore without a new law):** scenario outcome deck, 2×2 vendor matrix, comparison inspector, cohort ROI calculator.
 
@@ -115,7 +132,8 @@ Nav matches scroll: Air-Gap · Programs · Board Kit · Evidence · FAQ.
 - **No micro-copy under primary buttons.** SLA credit lives on the tariff, not as needy subtext.
 - **No street addresses** in HTML, JSON-LD, or footers. `Toronto, Ontario` or `In-Person (Toronto) & Virtual (Ontario-Wide)`.
 - **No “Toronto, ON, Toronto”.**
-- Stage 1 delivery is founder-led (Daniel Cooper, RP, CRPO #17513). Do not pluralize a bench that is not named on the public register.
+- **Regulatory & Governance Positioning:** Stage 1 clinical direction and health information custodianship are held by Daniel Cooper, RP (CRPO #17513). However, this credential is anchored strictly in the **governance / statutory layer** (Air-Gap Chamber 02, Vendor Diligence report, and footer disclaimer), never as a billboard on the front landing hero.
+- **Corporate & High-Stakes Fluency:** Explicitly position clinicians as possessing firsthand fluency in billables, high-stakes litigation, equity partnerships, and organizational pressure—not generic community therapy.
 - Language bans: absolute privilege, solicitor-client privilege, full clinical privilege, diagnostic capacity as an RP selling point, LIVE TELEMETRY, trainee-bashing that implies uniqueness in the CRPO 6.2 sense.
 
 Voice: direct, unsentimental, adult. Treat the person, not the title. No “healing journey”, “safe space”, “holding space”.
@@ -146,7 +164,9 @@ If a device would look at home on a Series B marketing site, it does not ship.
 - The visible headline is the `<h1>`.
 - Booking links that open Cal.com: `target="_blank" rel="noopener"` plus `js-booking`.
 - After editing `site.js`, run `scratch/validate_js.py` if present; otherwise a syntax check that the file parses.
-- **Mandatory Git Version Control:** Every update to `ernest.care/` MUST be committed to git immediately upon completion with a descriptive commit message (`feat(...)`, `fix(...)`) and tagged at major milestones. Never leave uncommitted changes at session close.
+- **Google Drive Primary Source of Truth:** All production files are written and served directly from `G:\My Drive_Clinical Practice_Ernest Care (B2B)_Web\ernest.care\`. Zero dependency on remote Git repositories or FTP pipelines.
+- **Dated Drive Archiving:** Every release milestone must be archived as a standalone dated snapshot directory (`90_Archive_Versions/YYYY-MM-DD_vX.X.X_Descriptor/`) and `.zip` archive (`Snapshot_vX.X.X_YYYY-MM-DD_Live.zip`) in Google Drive.
+- **Mandatory Git Version Control:** Every update to `ernest.care/` MUST also be committed to local git with descriptive commit messages (`feat(...)`, `fix(...)`) and tagged at major milestones (`v2.0.0-release`).
 
 ---
 
