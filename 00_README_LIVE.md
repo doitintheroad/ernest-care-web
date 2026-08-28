@@ -2,17 +2,18 @@
 
 This directory (`06_Web/ernest.care/`) is the **authoritative live deployment directory** for Ernest Care (ernest.care).
 
-- **Version:** 1.6.0
+- **Version:** 2.0.0 (Major Generation Release)
 - **Release Date:** 2026-08-27
 - **Main Page:** `index.html`
-- **Styles:** `styles.css?v=53` (Visual law: Fraunces monograph, 0px radius, dark glass canopy, 4-stage vault cadence)
-- **Scripts:** `site.js?v=53`
+- **Styles:** `styles.css?v=54` (Visual law: Fraunces monograph, 0px radius, dark glass canopy, 4-stage vault cadence, retainer spec plate)
+- **Scripts:** `site.js?v=54`
 - **Private Proposals:** `private/`
 - **Board Kit Reports:** `reports/`
-- **Archive Reference:** `90_Archive_Versions/2026-08-27_v1.6.0_Theatrical-Vault-and-Canopy/`
+- **Archive Reference:** `90_Archive_Versions/2026-08-27_v2.0.0_Ernest-Care-2.0-Architectural-Release/`
 
-### Canonical Standards Enforced:
+### Canonical Standards Enforced (Ernest Care 2.0):
 1. Pure vanilla stack (zero React/Vite runtime bloat, zero dependencies).
-2. Continuous dark canopy across top banner, navigation, and hero.
-3. 4-Stage Executive Vault rhythm before transitioning to tactile warm paper monographs.
-4. Tapered gold hairlines and blueprint precision framing.
+2. Apple-grade negative space: zero top-banner clutter, zero personal vanity photo on hero.
+3. Institutional Retainer Specification Plate answering the 4 core enterprise criteria.
+4. 4-Stage Executive Vault rhythm before transitioning to tactile warm paper monographs.
+5. Tapered gold hairlines and blueprint precision framing.
