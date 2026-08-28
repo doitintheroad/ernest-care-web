@@ -49,7 +49,6 @@
   display: block;
 }
 
-
 /* Base Reset & Smooth Rendering */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -381,7 +380,6 @@ nav.links a.btn:hover {
    Buttons & Interactive CTAs
    ========================================================================== */
 
-
 .btn {
   display: inline-flex;
   align-items: center;
@@ -441,7 +439,6 @@ nav.links a.btn:hover {
   color: var(--white);
   box-shadow: 0 4px 14px rgba(27, 24, 20, 0.1);
 }
-
 
 /* CTA Stack with Integrated Subtext */
 .cta-stack {
@@ -1127,7 +1124,6 @@ footer .legal {
   }
 }
 
-
 /* Spotlight Sheen & Fine Pointer Dynamics */
 @media (hover: hover) and (pointer: fine) {
   .card {
@@ -1151,7 +1147,6 @@ footer .legal {
     opacity: 1;
   }
 }
-
 
 /* Status Indicator in Top Banner */
 .status-dot {
@@ -1232,7 +1227,6 @@ footer .legal {
   font-weight: 600;
 }
 
-
 /* Screen Reader Only (for semantic SEO H1) */
 .sr-only {
   position: absolute;
@@ -1245,7 +1239,6 @@ footer .legal {
   white-space: nowrap;
   border-width: 0;
 }
-
 
 /* Vendor Landscape Matrix (Top 1% Interactive Architecture) */
 .matrix-section {
@@ -1964,7 +1957,6 @@ footer .legal {
   color: #AFA898;
 }
 
-
 /* ==========================================================================
    INTERACTIVE COHORT CAPACITY & ROI ENGINE
    ========================================================================== */
@@ -2150,7 +2142,6 @@ footer .legal {
   margin: 0;
 }
 
-
 /* ==========================================================================
    MULTI-PERSPECTIVE STRATEGIC COMPARISON INSPECTOR
    ========================================================================== */
@@ -2277,7 +2268,6 @@ footer .legal {
   color: var(--ink);
   margin: 0;
 }
-
 
 /* ==========================================================================
    INTERACTIVE CLINICAL SCENARIOS DECK
@@ -2413,7 +2403,6 @@ footer .legal {
   margin: 0;
 }
 
-
 /* Animated SVG Conduits in Air-Gap */
 .airgap-svg-conduit {
   width: 100%;
@@ -2430,7 +2419,6 @@ footer .legal {
   from { stroke-dashoffset: 20; }
   to { stroke-dashoffset: 0; }
 }
-
 
 /* ==========================================================================
    TOP 1% MOUSEOVER & TACTILE MICRO-INTERACTIONS
@@ -2589,7 +2577,6 @@ footer .legal {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-
 /* ==========================================================================
    GLOBAL MOUSEOVER SPOTLIGHT & RADIAL ILLUMINATION
    ========================================================================== */
@@ -2685,7 +2672,6 @@ footer .legal {
     transform: translateX(4px);
   }
 }
-
 
 /* ==========================================================================
    SCROLL-DRIVEN CONNECTED CLINICAL SPINE
@@ -2806,7 +2792,6 @@ footer .legal {
   animation: conduit-flow 2s linear infinite 1.2s;
 }
 
-
 /* ==========================================================================
    EXECUTIVE DILIGENCE & BOARD APPROVAL KIT
    ========================================================================== */
@@ -2924,7 +2909,6 @@ footer .legal {
   }
 }
 
-
 /* ==========================================================================
    EVIDENCE 3D TILT & DYNAMIC MOUSEOVER COLOR SHIFTS
    ========================================================================== */
@@ -3026,7 +3010,6 @@ footer .legal {
   transform: translateZ(8px);
 }
 
-
 /* ==========================================================================
    FIGMA AI UX INTEGRATIONS (MOTION, GRIDS, BLENDS)
    ========================================================================== */
@@ -3122,7 +3105,6 @@ footer .legal {
 .hover-bloom:hover {
   transform: none;
 }
-
 
 /* Fix double borders for hairline grid */
 .grid-hairline > .card,
@@ -3822,7 +3804,6 @@ footer .legal {
   .hero-plate { order: 0; }
 }
 
-
 /* ==========================================================================
    Hero Specification Plate (Apple-Grade Minimalist Architecture)
    ========================================================================== */
@@ -3949,7 +3930,6 @@ footer .legal {
     padding: 24px 20px 20px;
   }
 }
-
 
 /* ==========================================================================
    Apple-Grade Atmospheric Depth, 3D Sheen, and Tactile Dossiers
@@ -4255,7 +4235,6 @@ footer .legal {
   }
 }
 
-
 /* ==========================================================================
    Integrated Apple Hero Specification Dock (Full-Width Cinematic Anchor)
    ========================================================================== */
@@ -4397,8 +4376,6 @@ footer .legal {
   }
 }
 
-
-
 /* Scroll cue indicator */
 .hero-scroll-cue {
   position: absolute;
@@ -4462,8 +4439,6 @@ footer .legal {
   }
 }
 
-
-
 /* Scroll cue indicator */
 .hero-scroll-cue {
   position: absolute;
@@ -4524,8 +4499,6 @@ footer .legal {
     display: none;
   }
 }
-
-
 
 /* INITIAL STATE IN CSS: SUBTEXT IS COMPLETELY INVISIBLE ON LOAD */
 .hero-subtext-stage {
@@ -4615,7 +4588,6 @@ footer .legal {
     display: none;
   }
 }
-
 
 /* ==========================================================================
    Apple-Grade Kinetic Hero: Mathematically Dead-Centered Headline -> Left Slide
@@ -4781,5 +4753,182 @@ footer .legal {
   }
   .hero-scroll-cue {
     display: none;
+  }
+}
+
+/* ==========================================================================
+   Interactive Law Firm Partner Attrition Calculator
+   ========================================================================== */
+.calculator-card {
+  background: rgba(18, 26, 21, 0.75);
+  border: 1px solid rgba(196, 132, 61, 0.28);
+  border-radius: 12px;
+  padding: clamp(28px, 4vw, 42px);
+  margin-top: 48px;
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.75),
+              inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.calc-controls-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  margin-bottom: 36px;
+}
+
+.calc-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+
+.calc-label {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #F6F3EA;
+  letter-spacing: -0.01em;
+}
+
+.calc-val-badge {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: var(--ochre);
+  font-weight: 400;
+}
+
+.calc-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(246, 243, 234, 0.15);
+  outline: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.calc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--ochre);
+  box-shadow: 0 0 12px rgba(196, 132, 61, 0.8), 0 2px 6px rgba(0,0,0,0.5);
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+
+.calc-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  background: #d4954d;
+}
+
+.calc-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--ochre);
+  border: none;
+  box-shadow: 0 0 12px rgba(196, 132, 61, 0.8);
+  cursor: pointer;
+}
+
+.calc-range-marks {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--sans);
+  font-size: 11px;
+  color: rgba(246, 243, 234, 0.4);
+  margin-top: 8px;
+}
+
+.calc-results-dock {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  background: rgba(14, 20, 16, 0.85);
+  border: 1px solid rgba(196, 132, 61, 0.2);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.calc-stat-cell {
+  padding: 0 20px;
+  border-right: 1px solid rgba(196, 132, 61, 0.15);
+  display: flex;
+  flex-direction: column;
+}
+
+.calc-stat-cell:first-child {
+  padding-left: 0;
+}
+
+.calc-stat-cell:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.calc-stat-k {
+  font-family: var(--sans);
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(246, 243, 234, 0.55);
+  margin-bottom: 6px;
+}
+
+.calc-stat-v {
+  font-family: var(--serif);
+  font-size: clamp(24px, 2.5vw, 32px);
+  color: #F6F3EA;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.calc-roi-badge {
+  color: var(--ochre);
+}
+
+.calc-stat-sub {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: rgba(246, 243, 234, 0.45);
+}
+
+.calc-disclaimer {
+  font-family: var(--sans);
+  font-size: 12px;
+  line-height: 1.55;
+  color: rgba(246, 243, 234, 0.5);
+  margin: 0;
+}
+
+@media (max-width: 960px) {
+  .calc-controls-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .calc-results-dock {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .calc-stat-cell {
+    border-right: none;
+    border-bottom: 1px solid rgba(196, 132, 61, 0.12);
+    padding: 0 0 16px 0;
+  }
+  .calc-stat-cell:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
   }
 }

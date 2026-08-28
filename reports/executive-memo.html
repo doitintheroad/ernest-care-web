@@ -384,6 +384,91 @@
       break-inside: avoid;
     }
   }
+
+  /* Print Controls & Boardroom PDF Output */
+  .print-control-bar {
+    max-width: 860px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .print-nav-back {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .print-nav-back:hover {
+    color: var(--ink);
+    text-decoration: underline;
+  }
+  .btn-print {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ledger-deep);
+    color: #F7F4EC;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+  .btn-print:hover {
+    background: #0f1c14;
+    transform: translateY(-1px);
+  }
+
+  @media print {
+    @page {
+      size: letter portrait;
+      margin: 16mm 14mm;
+    }
+    body {
+      background: #FFFFFF !important;
+      color: #000000 !important;
+      padding: 0 !important;
+      font-size: 10.5pt !important;
+      line-height: 1.5 !important;
+    }
+    .print-control-bar {
+      display: none !important;
+    }
+    .report-page {
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      max-width: 100% !important;
+      border-top: none !important;
+      background: transparent !important;
+    }
+    .report-header {
+      border-bottom: 2pt solid #1B1814 !important;
+    }
+    h1, h2, h3, h4 {
+      page-break-after: avoid;
+      break-after: avoid;
+      color: #000000 !important;
+    }
+    p, table, tr, .memo-section, .diligence-block {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    a {
+      text-decoration: none !important;
+      color: #000000 !important;
+    }
+  }
+
 </style>
 
 </head>
@@ -394,7 +479,15 @@
   Print / Export as Executive PDF &rarr;
 </button>
 
-<div class="report-page">
+  <div class="print-control-bar">
+    <a href="../index.html" class="print-nav-back">&larr; Return to Ernest Care Platform</a>
+    <button class="btn-print" onclick="window.print()" aria-label="Print or Export PDF">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+      Print / Save as PDF
+    </button>
+  </div>
+
+  <div class="report-page">
   <div class="report-header">
     <div class="report-brand">
       <div class="report-wordmark">

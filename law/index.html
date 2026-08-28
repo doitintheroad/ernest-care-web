@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="../styles.css?v=64">
+<link rel="stylesheet" href="../styles.css?v=65">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="alternate icon" href="../favicon.svg">
 
@@ -92,6 +92,21 @@
 <meta property="og:url" content="https://ernest.care/law">
 <meta property="og:image" content="https://ernest.care/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Clinical Carve-Out for Law Firms",
+  "provider": {
+    "@type": "ProfessionalService",
+    "name": "Ernest Care",
+    "url": "https://ernest.care/"
+  },
+  "serviceType": "Corporate Psychotherapy & Partner Retainer",
+  "areaServed": "Ontario, Canada",
+  "description": "Confidential clinical psychotherapy carve-outs for Ontario law firm partners, practice group leads, and senior litigation associates."
+}
+</script>
 </head>
 <body>
 
@@ -110,7 +125,7 @@
       <a class="navlink" href="#air-gap">Air-Gap</a>
       <a class="navlink" href="#economics">Attrition ROI</a>
       <a class="navlink" href="#board-kit">Board Memo</a>
-      <a class="btn js-booking" href="https://cal.com/daniel-cooper/30min" target="_blank" rel="noopener">Partner Briefing &rarr;</a>
+      <a class="btn js-booking" href="https://cal.com/daniel-cooper/30min?notes=Law%20Firm%20Partner%20Briefing&type=law-firm" target="_blank" rel="noopener">Partner Briefing &rarr;</a>
     </nav>
     <button id="mobile-toggle" aria-label="Open navigation menu">
       <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -122,7 +137,7 @@
     <a href="#air-gap">Air-Gap</a>
     <a href="#economics">Attrition ROI</a>
     <a href="#board-kit">Board Memo</a>
-    <a href="https://cal.com/daniel-cooper/30min" class="js-booking" style="color: var(--brass-bright); font-weight: 600;">Book 20-Min Briefing &rarr;</a>
+    <a href="https://cal.com/daniel-cooper/30min?notes=Law%20Firm%20Partner%20Briefing&type=law-firm" class="js-booking" style="color: var(--brass-bright); font-weight: 600;">Book 20-Min Briefing &rarr;</a>
   </div>
 </header>
 
@@ -141,7 +156,7 @@
         The litigators and senior associates carrying your firm's book will never call a 1-800 EAP line. They know what mental health stigma costs on the partner track. Ernest Care is the confidential clinical carve-out for legal partnerships: dedicated Registered Psychotherapists fluent in high-stakes pressure, 48-business-hour intake, and total statutory data isolation under PHIPA. The firm receives a blind invoice; your partners receive sealed care.
       </p>
       <div class="cta-row" style="margin-bottom: 56px;">
-        <a href="https://cal.com/daniel-cooper/30min" target="_blank" rel="noopener" class="btn btn-brass js-booking">Schedule a 20-minute partner briefing</a>
+        <a href="https://cal.com/daniel-cooper/30min?notes=Law%20Firm%20Partner%20Briefing&type=law-firm" target="_blank" rel="noopener" class="btn btn-brass js-booking">Schedule a 20-minute partner briefing</a>
         <a href="../reports/executive-memo.html" target="_blank" rel="noopener" class="btn btn-outline btn-on-dark">Review the Executive Board Memo &rarr;</a>
       </div>
 
@@ -168,6 +183,108 @@
           <span class="dock-v">Consolidated monthly bank billed like expert witness disbursements</span>
         </div>
       </div>
+      <!-- INTERACTIVE ATTRITION MODEL -->
+      <div class="calculator-card fade-up">
+        <div class="calculator-header">
+          <span class="coord" style="color: var(--ochre);">INTERACTIVE ATTRITION MODEL</span>
+          <h3 style="font-family: var(--serif); font-size: clamp(22px, 2.2vw, 26px); font-weight: 400; color: #F6F3EA; margin: 6px 0 10px;">The Partner Preservation Yield</h3>
+          <p style="font-size: 13.5px; color: rgba(246, 243, 234, 0.7); margin: 0 0 28px;">Adjust your partnership size and average billing rate to model the capital preservation ratio of an executive clinical carve-out.</p>
+        </div>
+        
+        <div class="calc-controls-grid">
+          <div class="calc-control-group">
+            <div class="calc-label-row">
+              <label for="slider-partners" class="calc-label">Partners &amp; Senior Litigators</label>
+              <span class="calc-val-badge" id="val-partners">15</span>
+            </div>
+            <input type="range" id="slider-partners" min="5" max="50" step="1" value="15" class="calc-slider" aria-label="Number of Partners">
+            <div class="calc-range-marks">
+              <span>5</span>
+              <span>25</span>
+              <span>50</span>
+            </div>
+          </div>
+
+          <div class="calc-control-group">
+            <div class="calc-label-row">
+              <label for="slider-rate" class="calc-label">Average Hourly Billing Rate</label>
+              <span class="calc-val-badge" id="val-rate">$650/hr</span>
+            </div>
+            <input type="range" id="slider-rate" min="400" max="1200" step="25" value="650" class="calc-slider" aria-label="Hourly Billing Rate">
+            <div class="calc-range-marks">
+              <span>$400</span>
+              <span>$800</span>
+              <span>$1,200</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-results-dock">
+          <div class="calc-stat-cell">
+            <span class="calc-stat-k">Annual Billables Book</span>
+            <strong class="calc-stat-v" id="res-book">$17.5M</strong>
+            <span class="calc-stat-sub">1,800 hrs/yr &times; cohort</span>
+          </div>
+          <div class="calc-stat-cell">
+            <span class="calc-stat-k">Single Partner Departure Loss</span>
+            <strong class="calc-stat-v" id="res-loss">$520,000</strong>
+            <span class="calc-stat-sub">Search fee + 800 unbilled hrs</span>
+          </div>
+          <div class="calc-stat-cell calc-stat-highlight">
+            <span class="calc-stat-k">Annual Retainer Coverage</span>
+            <strong class="calc-stat-v calc-roi-badge" id="res-roi">19.7&times;</strong>
+            <span class="calc-stat-sub">Net yield on Ernest Core ($26.4k/yr)</span>
+          </div>
+        </div>
+
+        <p class="calc-disclaimer">Model assumes conservative 800 unbilled lateral ramp hours and standard legal search placement fees. Retaining just one partner over a 4-year period covers the entire firm's clinical carve-out nearly twenty times over.</p>
+      </div>
+
+      <script>
+        (function() {
+          const sPartners = document.getElementById('slider-partners');
+          const sRate = document.getElementById('slider-rate');
+          const vPartners = document.getElementById('val-partners');
+          const vRate = document.getElementById('val-rate');
+          const rBook = document.getElementById('res-book');
+          const rLoss = document.getElementById('res-loss');
+          const rRoi = document.getElementById('res-roi');
+
+          if (!sPartners || !sRate) return;
+
+          function updateCalc() {
+            const partners = parseInt(sPartners.value, 10);
+            const rate = parseInt(sRate.value, 10);
+
+            vPartners.textContent = partners;
+            vRate.textContent = '$' + rate + '/hr';
+
+            // Annual Billable Book: partners * 1800 hrs * rate
+            const bookTotal = partners * 1800 * rate;
+            const bookFormatted = (bookTotal / 1000000).toFixed(1) + 'M';
+            rBook.textContent = '$' + bookFormatted;
+
+            // Single Partner Departure Loss:
+            // Estimated compensation = rate * 600
+            // Search fee = 25% of compensation
+            // Lost billing during ramp = 800 hrs * (rate * 0.7 profit/cost contribution)
+            const searchFee = rate * 150; 
+            const unbilledLoss = 800 * (rate * 0.65);
+            const totalLoss = Math.round(searchFee + unbilledLoss);
+            rLoss.textContent = '$' + totalLoss.toLocaleString();
+
+            // Ernest Core Retainer = $26,400 / yr
+            const retainer = 26400;
+            const roiMultiplier = (totalLoss / retainer).toFixed(1);
+            rRoi.textContent = roiMultiplier + 'x';
+          }
+
+          sPartners.addEventListener('input', updateCalc);
+          sRate.addEventListener('input', updateCalc);
+          updateCalc();
+        })();
+      </script>
+
     </div>
   </section>
 
@@ -332,7 +449,7 @@
       <h2>A 20-minute briefing with the Clinical Direction.</h2>
       <p class="lede on-dark">Confidential consultation. No sales decks, no marketing fluff. We discuss your partnership list, billables cadence, and whether this carve-out fits your firm.</p>
       <div class="cta-row">
-        <a href="https://cal.com/daniel-cooper/30min" target="_blank" rel="noopener" class="btn btn-brass js-booking">Book a 20-minute partner briefing</a>
+        <a href="https://cal.com/daniel-cooper/30min?notes=Law%20Firm%20Partner%20Briefing&type=law-firm" target="_blank" rel="noopener" class="btn btn-brass js-booking">Book a 20-minute partner briefing</a>
         <a href="mailto:daniel@ernest.care?subject=Law%20Firm%20Carve-Out%20Inquiry" class="btn btn-outline btn-on-dark">Request firm proposal</a>
       </div>
     </div>
@@ -377,6 +494,6 @@
   </div>
 </footer>
 
-<script src="../site.js?v=64" defer></script>
+<script src="../site.js?v=65" defer></script>
 </body>
 </html>
