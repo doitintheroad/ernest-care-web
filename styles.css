@@ -3373,93 +3373,92 @@ footer .legal {
   color: rgba(246, 243, 234, 0.6);
 }
 
-/* --- Ledger Ribbon (Apple-Grade Minimalist Specification Bar) --- */
+/* --- Floating Architectural Specification Dock (Apple Hardware Aesthetic) --- */
 .ledger-strip {
-  background: rgba(16, 22, 18, 0.55);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-top: none;
-  border-bottom: none;
-  padding: clamp(38px, 4.5vw, 54px) 0;
-  box-shadow: none;
+  background: transparent;
+  padding: 20px 0 40px;
   position: relative;
 }
 
-.ledger-strip .ledger-grid {
+.ledger-dock {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: clamp(24px, 3.5vw, 44px);
-  background: transparent; /* Eliminates blocky grout */
+  gap: 0; /* Gap 0 ensures dividers are mathematically dead-centered */
+  background: rgba(18, 25, 20, 0.65);
+  border: 1px solid rgba(196, 132, 61, 0.22);
+  border-radius: 10px;
+  padding: 28px 32px;
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.7),
+              inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
-.ledger-grid-3 {
-  grid-template-columns: repeat(3, 1fr);
-  margin-top: 40px;
+.ledger-dock .ledger-cell {
+  background: transparent;
+  padding: 0 clamp(16px, 2.2vw, 28px);
+  border-right: 1px solid rgba(196, 132, 61, 0.16);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.25s ease;
 }
 
-.ledger-cell {
-  background: var(--paper);
-  padding: 28px 24px 32px;
+.ledger-dock .ledger-cell:first-child {
+  padding-left: 0;
 }
 
-.ledger-strip .ledger-cell {
-  background: transparent; /* Eliminates solid box tile */
-  padding: 0 clamp(16px, 2vw, 24px) 0 0;
-  border-right: 1px solid rgba(196, 132, 61, 0.14); /* Subtle optical glass separator */
-  position: relative;
-  transition: opacity 0.3s ease;
-}
-
-.ledger-strip .ledger-cell:last-child {
+.ledger-dock .ledger-cell:last-child {
   border-right: none;
   padding-right: 0;
 }
 
-.ledger-strip .mark {
-  display: none; /* Removes clunky vector icons for pure Apple typographic authority */
-}
-
-.ledger-strip .ledger-k {
+.ledger-dock .ledger-k {
   display: block;
   font-family: var(--serif);
-  font-size: clamp(20px, 1.8vw, 23px);
+  font-size: clamp(19px, 1.6vw, 22px);
   font-weight: 400;
   color: #F6F3EA;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
   letter-spacing: -0.015em;
   line-height: 1.2;
 }
 
-.ledger-strip .ledger-v {
+.ledger-dock .ledger-v {
   display: block;
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: 12.5px;
   line-height: 1.5;
-  color: rgba(246, 243, 234, 0.58);
-  letter-spacing: -0.01em;
+  color: rgba(246, 243, 234, 0.6);
+  letter-spacing: -0.005em;
 }
 
 @media (max-width: 960px) {
-  .ledger-strip .ledger-grid {
+  .ledger-dock {
     grid-template-columns: repeat(2, 1fr);
-    gap: 32px 24px;
+    row-gap: 28px;
+    padding: 28px 24px;
   }
-  .ledger-strip .ledger-cell:nth-child(2) {
+  .ledger-dock .ledger-cell:nth-child(2) {
     border-right: none;
+  }
+  .ledger-dock .ledger-cell:nth-child(3) {
+    padding-left: 0;
   }
 }
 
 @media (max-width: 600px) {
-  .ledger-strip .ledger-grid {
+  .ledger-dock {
     grid-template-columns: 1fr;
-    gap: 24px;
+    row-gap: 20px;
+    padding: 24px 20px;
   }
-  .ledger-strip .ledger-cell {
+  .ledger-dock .ledger-cell {
     border-right: none;
     border-bottom: 1px solid rgba(196, 132, 61, 0.12);
-    padding: 0 0 20px 0;
+    padding: 0 0 16px 0;
   }
-  .ledger-strip .ledger-cell:last-child {
+  .ledger-dock .ledger-cell:last-child {
     border-bottom: none;
     padding-bottom: 0;
   }
@@ -4251,6 +4250,148 @@ footer .legal {
     padding: 0 0 24px 0;
   }
   .evidence-col:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+
+/* ==========================================================================
+   Integrated Apple Hero Specification Dock (Full-Width Cinematic Anchor)
+   ========================================================================== */
+
+.hero-obsidian {
+  background: radial-gradient(ellipse 95% 75% at 50% 30%, #192A21 0%, #101512 55%, #0A0C0A 100%);
+  color: var(--paper);
+  padding: clamp(64px, 8.5vw, 112px) 0 clamp(48px, 6vw, 80px);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(48px, 6vw, 76px);
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content {
+  max-width: 840px;
+}
+
+.hero-display {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-optical-sizing: auto;
+  font-size: clamp(38px, 5.8vw, 68px);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: #F6F3EA;
+  margin: 0 0 24px;
+}
+
+.hero-display em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ochre);
+}
+
+.hero-lede {
+  font-size: clamp(16.5px, 1.8vw, 19px);
+  line-height: 1.62;
+  color: #C8C4B8;
+  max-width: 720px;
+  margin: 0 0 32px;
+}
+
+/* Integrated Specification Dock */
+.hero-spec-dock {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  background: rgba(18, 26, 21, 0.65);
+  border: 1px solid rgba(196, 132, 61, 0.24);
+  border-radius: 10px;
+  padding: 28px 32px;
+  box-shadow: 0 28px 56px -14px rgba(0, 0, 0, 0.75),
+              inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.spec-dock-cell {
+  padding: 0 clamp(16px, 2.2vw, 28px);
+  border-right: 1px solid rgba(196, 132, 61, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.spec-dock-cell:first-child {
+  padding-left: 0;
+}
+
+.spec-dock-cell:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.spec-dock-cell .coord {
+  margin: 0 0 8px;
+  font-size: 10px;
+  color: rgba(196, 132, 61, 0.85);
+  letter-spacing: 0.14em;
+  font-family: var(--sans);
+  font-weight: 600;
+}
+
+.dock-k {
+  display: block;
+  font-family: var(--serif);
+  font-size: clamp(18.5px, 1.5vw, 21.5px);
+  font-weight: 400;
+  color: #F6F3EA;
+  margin-bottom: 5px;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+.dock-v {
+  display: block;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: rgba(246, 243, 234, 0.62);
+  letter-spacing: -0.005em;
+}
+
+@media (max-width: 960px) {
+  .hero-spec-dock {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 28px;
+    padding: 24px 20px;
+  }
+  .spec-dock-cell:nth-child(2) {
+    border-right: none;
+  }
+  .spec-dock-cell:nth-child(3) {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-spec-dock {
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+    padding: 20px 16px;
+  }
+  .spec-dock-cell {
+    border-right: none;
+    border-bottom: 1px solid rgba(196, 132, 61, 0.12);
+    padding: 0 0 16px 0;
+  }
+  .spec-dock-cell:last-child {
     border-bottom: none;
     padding-bottom: 0;
   }
