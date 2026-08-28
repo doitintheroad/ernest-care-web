@@ -70,3 +70,74 @@
     fadeElements.forEach(function (el) { fadeObserver.observe(el); });
   });
 })();
+
+
+/* ==========================================================================
+   Apple-Inspired Scroll-Driven Hero Choreography Engine (Pure Vanilla, Zero Bloat)
+   ========================================================================== */
+(function initHeroScroll() {
+  const track = document.querySelector('.hero-scroll-track');
+  const copyStage = document.querySelector('.hero-copy-stage');
+  const specStage = document.querySelector('.hero-spec-stage');
+  const cue = document.querySelector('.hero-scroll-cue');
+
+  if (!track || !copyStage || !specStage) return;
+
+  // Respect reduced motion
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  function onScroll() {
+    if (window.innerWidth <= 960) {
+      copyStage.style.transform = '';
+      specStage.style.transform = '';
+      specStage.style.opacity = '';
+      specStage.style.filter = '';
+      return;
+    }
+
+    const rect = track.getBoundingClientRect();
+    const totalDist = rect.height - window.innerHeight;
+    if (totalDist <= 0) return;
+
+    const progress = Math.min(Math.max(-rect.top / totalDist, 0), 1);
+
+    // Smooth cubic easing
+    const ease = progress < 0.5 
+      ? 2 * progress * progress 
+      : -1 + (4 - 2 * progress) * progress;
+
+    // At progress 0 (top): Copy is centered across screen (+14% shift)
+    // At progress 1 (scroll completed): Copy anchors cleanly to the left column (0% shift)
+    const copyOffset = (1 - ease) * 14; 
+    copyStage.style.transform = 'translate3d(' + copyOffset + '%, 0, 0)';
+
+    // At progress 0: Spec stage is off-screen to right (+80px), hidden (opacity 0), blurred (8px)
+    // As you scroll: Glides smoothly into place at 0px, opacity 1, blur 0px
+    const specOffset = (1 - ease) * 80;
+    const specOpacity = Math.min(Math.max((progress - 0.05) / 0.75, 0), 1);
+    const specBlur = (1 - ease) * 8;
+
+    specStage.style.transform = 'translate3d(' + specOffset + 'px, 0, 0)';
+    specStage.style.opacity = specOpacity.toString();
+    specStage.style.filter = specBlur > 0.1 ? 'blur(' + specBlur.toFixed(1) + 'px)' : 'none';
+    specStage.style.pointerEvents = progress > 0.5 ? 'auto' : 'none';
+
+    // Fade out scroll cue indicator
+    if (cue) {
+      const cueOpacity = Math.max(0.7 - progress * 3, 0);
+      cue.style.opacity = cueOpacity.toString();
+    }
+  }
+
+  window.addEventListener('scroll', function() {
+    window.requestAnimationFrame(onScroll);
+  }, { passive: true });
+
+  window.addEventListener('resize', function() {
+    window.requestAnimationFrame(onScroll);
+  }, { passive: true });
+
+  // Initial call
+  onScroll();
+})();
