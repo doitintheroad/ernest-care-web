@@ -4398,58 +4398,6 @@ footer .legal {
 }
 
 
-/* ==========================================================================
-   Apple-Inspired Scroll-Driven Hero Choreography
-   ========================================================================== */
-
-.hero-scroll-track {
-  position: relative;
-  height: 165vh; /* Just enough scroll to feel cinematic without being tedious */
-  background: #0A0C0A;
-}
-
-.hero-sticky-stage {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  z-index: 10;
-}
-
-.hero-sticky-stage .hero-obsidian {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  padding: 0;
-  background: radial-gradient(ellipse 95% 75% at 50% 35%, #18271F 0%, #101512 55%, #0A0C0A 100%);
-  position: relative;
-}
-
-.hero-choreography {
-  position: relative;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1.12fr 0.88fr;
-  gap: clamp(32px, 5vw, 68px);
-  align-items: center;
-}
-
-.hero-copy-stage {
-  max-width: 820px;
-  will-change: transform;
-  transform: translate3d(0, 0, 0);
-  transition: transform 0.05s linear;
-}
-
-.hero-spec-stage {
-  will-change: transform, opacity, filter;
-  transform: translate3d(0, 0, 0);
-  transition: transform 0.05s linear, opacity 0.05s linear, filter 0.05s linear;
-}
 
 /* Scroll cue indicator */
 .hero-scroll-cue {
@@ -4508,6 +4456,159 @@ footer .legal {
     opacity: 1 !important;
     filter: none !important;
     max-width: 100%;
+  }
+  .hero-scroll-cue {
+    display: none;
+  }
+}
+
+
+/* ==========================================================================
+   Apple-Grade Kinetic Hero: Full-Width 2-Line Headline -> Zero-Shift Left Slide
+   ========================================================================== */
+
+.hero-scroll-track {
+  position: relative;
+  height: 190vh; /* Smooth, luxurious scrub distance */
+  background: #0A0C0A;
+}
+
+.hero-sticky-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+.hero-sticky-stage .hero-obsidian {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  background: radial-gradient(ellipse 95% 75% at 50% 35%, #192A21 0%, #101512 55%, #0A0C0A 100%);
+  position: relative;
+}
+
+.hero-choreography {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+
+.hero-copy-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-h1-anchor {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.hero-display {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-optical-sizing: auto;
+  font-size: clamp(36px, 4.2vw, 56px);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: #F6F3EA;
+  margin: 0;
+  white-space: nowrap; /* 2 majestic sweeping lines */
+  will-change: transform;
+  transform-origin: left center;
+  transition: transform 0.05s linear;
+}
+
+.hero-display em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ochre);
+}
+
+.hero-subtext-stage {
+  will-change: transform, opacity;
+  transition: transform 0.05s linear, opacity 0.05s linear;
+}
+
+.hero-lede {
+  font-size: clamp(15.5px, 1.6vw, 18px);
+  line-height: 1.62;
+  color: #C8C4B8;
+  max-width: 580px;
+  margin: 0 0 28px;
+}
+
+.hero-spec-stage {
+  will-change: transform, opacity, filter;
+  transition: transform 0.05s linear, opacity 0.05s linear, filter 0.05s linear;
+}
+
+/* Scroll cue indicator */
+.hero-scroll-cue {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.hero-scroll-cue .cue-label {
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(196, 132, 61, 0.75);
+  font-weight: 600;
+}
+
+.hero-scroll-cue .cue-line {
+  width: 1px;
+  height: 18px;
+  background: linear-gradient(to bottom, var(--ochre), transparent);
+  animation: pulseCueLine 2.2s infinite ease-in-out;
+}
+
+@media (max-width: 960px) {
+  .hero-scroll-track {
+    height: auto;
+  }
+  .hero-sticky-stage {
+    position: relative;
+    height: auto;
+    padding: clamp(64px, 10vw, 96px) 0;
+  }
+  .hero-choreography {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .hero-display {
+    white-space: normal; /* Normal wrap on mobile */
+    transform: none !important;
+  }
+  .hero-subtext-stage,
+  .hero-spec-stage {
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    pointer-events: auto !important;
   }
   .hero-scroll-cue {
     display: none;

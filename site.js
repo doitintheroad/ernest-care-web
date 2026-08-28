@@ -141,3 +141,91 @@
   // Initial call
   onScroll();
 })();
+
+
+/* ==========================================================================
+   Apple-Grade Kinetic Hero Engine: Smooth Slide + Staggered Subtext/Table Fade
+   ========================================================================== */
+(function initKineticHero() {
+  const track = document.querySelector('.hero-scroll-track');
+  const container = document.querySelector('.hero-choreography');
+  const h1 = document.querySelector('.hero-display');
+  const subtextStage = document.querySelector('.hero-subtext-stage');
+  const specStage = document.querySelector('.hero-spec-stage');
+  const cue = document.querySelector('.hero-scroll-cue');
+
+  if (!track || !container || !h1 || !subtextStage || !specStage) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  function onScroll() {
+    if (window.innerWidth <= 960) {
+      h1.style.transform = '';
+      subtextStage.style.transform = '';
+      subtextStage.style.opacity = '';
+      specStage.style.transform = '';
+      specStage.style.opacity = '';
+      specStage.style.filter = '';
+      return;
+    }
+
+    const rect = track.getBoundingClientRect();
+    const totalDist = rect.height - window.innerHeight;
+    if (totalDist <= 0) return;
+
+    // Scroll progress 0.0 -> 1.0
+    const progress = Math.min(Math.max(-rect.top / totalDist, 0), 1);
+
+    // ── STAGE 1: HEADLINE SLIDES FROM CENTER TO LEFT ANCHOR (Progress 0.0 -> 0.5)
+    // Calculate exact center offset relative to the container
+    const containerWidth = container.clientWidth;
+    const h1Width = h1.clientWidth;
+    // Dead-center X within the container
+    const maxCenterShift = Math.max((containerWidth - h1Width) / 2, 0);
+
+    const slideProgress = Math.min(progress / 0.5, 1);
+    // Smooth cubic bezier easing
+    const slideEase = slideProgress < 0.5
+      ? 2 * slideProgress * slideProgress
+      : -1 + (4 - 2 * slideProgress) * slideProgress;
+
+    const currentShift = maxCenterShift * (1 - slideEase);
+    h1.style.transform = 'translate3d(' + currentShift.toFixed(1) + 'px, 0, 0)';
+
+    // ── STAGE 2: SUBTEXT & TABLE FADE IN (Progress 0.35 -> 0.85)
+    const fadeProgress = Math.min(Math.max((progress - 0.35) / 0.5, 0), 1);
+    const fadeEase = fadeProgress * fadeProgress * (3 - 2 * fadeProgress); // Smoothstep
+
+    // Subtext floats gently up as it fades in
+    const subtextY = (1 - fadeEase) * 20;
+    subtextStage.style.opacity = fadeEase.toFixed(3);
+    subtextStage.style.transform = 'translate3d(0, ' + subtextY.toFixed(1) + 'px, 0)';
+    subtextStage.style.pointerEvents = fadeProgress > 0.7 ? 'auto' : 'none';
+
+    // Specification Table slides in from right (+45px) with soft focus reveal
+    const tableX = (1 - fadeEase) * 45;
+    const tableBlur = (1 - fadeEase) * 6;
+    specStage.style.opacity = fadeEase.toFixed(3);
+    specStage.style.transform = 'translate3d(' + tableX.toFixed(1) + 'px, 0, 0)';
+    specStage.style.filter = tableBlur > 0.1 ? 'blur(' + tableBlur.toFixed(1) + 'px)' : 'none';
+    specStage.style.pointerEvents = fadeProgress > 0.7 ? 'auto' : 'none';
+
+    // Scroll cue fades out quickly on first scrub
+    if (cue) {
+      const cueOpacity = Math.max(0.7 - progress * 3.5, 0);
+      cue.style.opacity = cueOpacity.toFixed(2);
+    }
+  }
+
+  window.addEventListener('scroll', function() {
+    window.requestAnimationFrame(onScroll);
+  }, { passive: true });
+
+  window.addEventListener('resize', function() {
+    window.requestAnimationFrame(onScroll);
+  }, { passive: true });
+
+  // Run on initial load
+  onScroll();
+})();
