@@ -39,6 +39,17 @@
   --shadow-inset: none;
 }
 
+/* Tapered Luxury Gold Rule */
+.gold-rule {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(to right, transparent, rgba(196, 132, 61, 0.45), transparent);
+  border: none;
+  margin: 0;
+  display: block;
+}
+
+
 /* Base Reset & Smooth Rendering */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -196,15 +207,15 @@ img {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Header & Navigation */
+/* Header & Navigation (Dark Obsidian Glass Canopy) */
 header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(247, 244, 236, 0.85);
+  background: rgba(14, 18, 15, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid rgba(196, 132, 61, 0.2);
   transition: background 0.3s ease, border-color 0.3s ease;
 }
 
@@ -212,7 +223,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 0;
+  padding: 16px 0;
 }
 
 .wordmark {
@@ -223,7 +234,8 @@ header {
   font-weight: 600;
   font-size: 23px;
   letter-spacing: -0.01em;
-  color: var(--ink);
+  color: #F6F3EA;
+  text-decoration: none;
 }
 
 .flourish {
@@ -232,7 +244,7 @@ header {
 }
 
 .flourish path {
-  stroke: var(--brass);
+  stroke: var(--ochre);
   stroke-width: 2.2;
   fill: none;
   stroke-linecap: round;
@@ -248,30 +260,52 @@ header {
 nav.links {
   display: flex;
   align-items: center;
-  gap: 36px;
+  gap: 32px;
 }
 
 nav.links a.navlink {
-  font-family: 'Public Sans', sans-serif;
-  font-size: 13.5px;
+  font-family: var(--mono);
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.01em;
-  color: var(--ink-soft);
-  transition: color 0.2s ease;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(246, 243, 234, 0.65);
+  text-decoration: none;
+  transition: color 0.25s ease;
 }
 
 nav.links a.navlink:hover {
-  color: var(--ink);
+  color: var(--ochre);
 }
 
-/* Mobile Toggle & Menu */
+nav.links a.btn {
+  background: transparent;
+  color: var(--ochre);
+  border: 1px solid rgba(196, 132, 61, 0.45);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border-radius: 0px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+nav.links a.btn:hover {
+  background: var(--ochre);
+  color: #0E120F;
+  border-color: var(--ochre);
+}
+
+/* Mobile Toggle & Menu (Dark Obsidian Glass) */
 #mobile-toggle {
   display: none;
   background: none;
   border: none;
   cursor: pointer;
   padding: 6px;
-  color: var(--ink);
+  color: #F6F3EA;
   margin-right: -6px;
 }
 
@@ -295,7 +329,7 @@ nav.links a.navlink:hover {
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    background: var(--paper);
+    background: #0E120F;
     transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, padding 0.3s ease;
   }
   
@@ -303,18 +337,22 @@ nav.links a.navlink:hover {
     max-height: 480px;
     opacity: 1;
     padding: 16px 24px 24px;
-    border-top: 1px solid var(--rule);
+    border-top: 1px solid rgba(196, 132, 61, 0.2);
+    border-bottom: 1px solid rgba(196, 132, 61, 0.2);
   }
   
   #mobile-menu a {
     display: block;
-    padding: 12px 0;
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--ink-soft);
-    border-bottom: 1px solid var(--rule-light);
+    padding: 14px 0;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(246, 243, 234, 0.75);
+    border-bottom: 1px solid rgba(196, 132, 61, 0.1);
     transform: translateY(-8px);
     opacity: 0;
+    text-decoration: none;
     transition: transform 0.35s ease, opacity 0.35s ease, color 0.2s ease;
   }
   
@@ -325,6 +363,10 @@ nav.links a.navlink:hover {
   #mobile-menu.open a {
     transform: translateY(0);
     opacity: 1;
+  }
+  
+  #mobile-menu a:hover {
+    color: var(--ochre);
   }
   
   #mobile-menu.open a:nth-child(1) { transition-delay: 0.04s; }
@@ -845,7 +887,7 @@ section.section {
 /* FAQ Accordion */
 details.faq {
   border-top: 1px solid var(--rule);
-  padding: 22px 0;
+  padding: 24px 8px;
   transition: all 0.3s ease;
 }
 
@@ -859,14 +901,17 @@ details.faq summary {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: 600;
-  font-size: 17px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 19px;
   color: var(--ink);
+  letter-spacing: -0.01em;
   transition: color 0.2s ease;
+  user-select: none;
 }
 
 details.faq summary:hover {
-  color: var(--ledger);
+  color: var(--ochre);
 }
 
 details.faq summary::-webkit-details-marker {
@@ -875,24 +920,27 @@ details.faq summary::-webkit-details-marker {
 
 details.faq summary::after {
   content: "+";
-  font-family: 'Public Sans', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
+  font-family: var(--mono);
+  font-weight: 400;
   font-size: 20px;
-  color: var(--brass);
+  color: var(--ochre);
   transition: transform 0.3s ease;
+  display: inline-block;
+  margin-left: 16px;
 }
 
 details.faq[open] summary::after {
   content: "−";
+  color: var(--ochre);
 }
 
 details.faq .faq-a {
-  margin-top: 14px;
+  margin-top: 16px;
+  padding-right: 32px;
   color: var(--ink-soft);
-  font-size: 15.5px;
-  line-height: 1.65;
-  max-width: 720px;
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 740px;
 }
 
 /* Closer & Final CTA */
@@ -3264,22 +3312,55 @@ footer .legal {
 .corner-bracket.tr { top: 10px; right: 10px; border-top-width: 1px; border-right-width: 1px; }
 .corner-bracket.bl { bottom: 10px; left: 10px; border-bottom-width: 1px; border-left-width: 1px; }
 .corner-bracket.br { bottom: 10px; right: 10px; border-bottom-width: 1px; border-right-width: 1px; }
+
+/* Hero Outer Blueprint Framing */
+.hero-obsidian > .corner-bracket {
+  width: 24px;
+  height: 24px;
+  border-color: rgba(196, 132, 61, 0.45);
+}
+.hero-obsidian > .corner-bracket.tl { top: 16px; left: 16px; border-top-width: 1.5px; border-left-width: 1.5px; }
+.hero-obsidian > .corner-bracket.tr { top: 16px; right: 16px; border-top-width: 1.5px; border-right-width: 1.5px; }
+.hero-obsidian > .corner-bracket.bl { bottom: 16px; left: 16px; border-bottom-width: 1.5px; border-left-width: 1.5px; }
+.hero-obsidian > .corner-bracket.br { bottom: 16px; right: 16px; border-bottom-width: 1.5px; border-right-width: 1.5px; }
 .hero-plate figcaption {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
   margin-top: 16px;
-  color: #C8C4B8;
-  font-size: 13px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(196, 132, 61, 0.35);
+  position: relative;
+}
+.hero-plate figcaption::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background: var(--ochre);
 }
 .hero-plate figcaption .coord {
   margin: 0;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  color: var(--ochre);
 }
 .hero-plate figcaption strong {
   font-family: var(--serif);
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 400;
-  color: var(--paper);
+  letter-spacing: -0.01em;
+  color: #F6F3EA;
+  margin: 2px 0;
+}
+.hero-plate figcaption span:last-child {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: rgba(246, 243, 234, 0.6);
 }
 
 /* --- Ledger strip --- */
@@ -3567,13 +3648,38 @@ footer .legal {
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: var(--rule);
+  border: 1px solid var(--rule);
 }
 .start-rail li {
-  background: var(--paper-deep);
-  padding: 28px 24px 36px;
+  background: var(--paper);
+  padding: 36px 30px 42px;
+  position: relative;
+  transition: background 0.4s ease;
+}
+.start-rail li:hover {
+  background: #FFFDF9;
 }
 .start-rail .coord {
   display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--ochre);
+  margin-bottom: 16px;
+}
+.start-rail h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.start-rail p {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 1.6;
+  margin: 0;
 }
 
 .faq-stack {
