@@ -336,3 +336,108 @@
   // Execute immediately on script parse
   updateChoreography();
 })();
+
+
+/* ==========================================================================
+   Apple-Grade Kinetic Hero Engine: True Dead-Center Headline -> Left Slide
+   ========================================================================== */
+(function initCenteredKineticHero() {
+  const track = document.querySelector('.hero-scroll-track');
+  const container = document.querySelector('.hero-choreography');
+  const h1 = document.querySelector('.hero-display');
+  const subtextStage = document.querySelector('.hero-subtext-stage');
+  const specStage = document.querySelector('.hero-spec-stage');
+  const cue = document.querySelector('.hero-scroll-cue');
+
+  if (!track || !container || !h1 || !subtextStage || !specStage) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) {
+    h1.style.transform = 'none';
+    subtextStage.style.opacity = '1';
+    subtextStage.style.transform = 'none';
+    subtextStage.style.pointerEvents = 'auto';
+    specStage.style.opacity = '1';
+    specStage.style.transform = 'none';
+    specStage.style.filter = 'none';
+    specStage.style.pointerEvents = 'auto';
+    return;
+  }
+
+  function updateHeroChoreography() {
+    if (window.innerWidth <= 960) {
+      h1.style.transform = '';
+      subtextStage.style.opacity = '';
+      subtextStage.style.transform = '';
+      subtextStage.style.pointerEvents = '';
+      specStage.style.opacity = '';
+      specStage.style.transform = '';
+      specStage.style.filter = '';
+      specStage.style.pointerEvents = '';
+      return;
+    }
+
+    const rect = track.getBoundingClientRect();
+    const totalDist = rect.height - window.innerHeight;
+    if (totalDist <= 0) return;
+
+    // Current scrub progress from 0.0 (top) to 1.0 (bottom of hero track)
+    const progress = Math.min(Math.max(-rect.top / totalDist, 0), 1);
+
+    // ── STAGE 1: HEADLINE STARTS MATHEMATICALLY DEAD-CENTER, SLIDES TO LEFT ANCHOR
+    // Dead-center offset: (Container Center) - (H1 Center)
+    const containerW = container.clientWidth;
+    const h1W = h1.clientWidth;
+    const deadCenterX = Math.max((containerW - h1W) / 2, 0);
+
+    // Slide happens over progress 0.0 -> 0.48
+    const slideProgress = Math.min(progress / 0.48, 1);
+    // Smooth cubic bezier easing
+    const slideEase = slideProgress < 0.5
+      ? 2 * slideProgress * slideProgress
+      : -1 + (4 - 2 * slideProgress) * slideProgress;
+
+    // At progress 0: translateX = deadCenterX (exact dead-center in container)
+    // At progress 1 (slide done): translateX = 0 (exact left anchor)
+    const currentX = deadCenterX * (1 - slideEase);
+    h1.style.transform = 'translate3d(' + currentX.toFixed(1) + 'px, 0, 0)';
+
+    // ── STAGE 2: SUBTEXT & SPEC TABLE FADE IN
+    // Starts as headline settles on the left (progress 0.40 -> 0.88)
+    const fadeProgress = Math.min(Math.max((progress - 0.40) / 0.48, 0), 1);
+    // Smoothstep interpolation
+    const fadeEase = fadeProgress * fadeProgress * (3 - 2 * fadeProgress);
+
+    // Subtext gently floats up 24px into place
+    const subtextY = (1 - fadeEase) * 24;
+    subtextStage.style.opacity = fadeEase.toFixed(3);
+    subtextStage.style.transform = 'translate3d(0, ' + subtextY.toFixed(1) + 'px, 0)';
+    subtextStage.style.pointerEvents = fadeProgress > 0.75 ? 'auto' : 'none';
+
+    // Specification Table glides in 45px from right, unblurs
+    const tableX = (1 - fadeEase) * 45;
+    const tableBlur = (1 - fadeEase) * 6;
+    specStage.style.opacity = fadeEase.toFixed(3);
+    specStage.style.transform = 'translate3d(' + tableX.toFixed(1) + 'px, 0, 0)';
+    specStage.style.filter = tableBlur > 0.1 ? 'blur(' + tableBlur.toFixed(1) + 'px)' : 'none';
+    specStage.style.pointerEvents = fadeProgress > 0.75 ? 'auto' : 'none';
+
+    // Scroll cue fades out on initial scroll
+    if (cue) {
+      const cueOpacity = Math.max(0.75 - progress * 4, 0);
+      cue.style.opacity = cueOpacity.toFixed(2);
+    }
+  }
+
+  // Bind scroll and resize
+  window.addEventListener('scroll', function() {
+    window.requestAnimationFrame(updateHeroChoreography);
+  }, { passive: true });
+
+  window.addEventListener('resize', function() {
+    window.requestAnimationFrame(updateHeroChoreography);
+  }, { passive: true });
+
+  // Execute immediately on load
+  updateHeroChoreography();
+})();

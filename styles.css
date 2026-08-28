@@ -4526,13 +4526,104 @@ footer .legal {
 }
 
 
+
+/* INITIAL STATE IN CSS: SUBTEXT IS COMPLETELY INVISIBLE ON LOAD */
+.hero-subtext-stage {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, 24px, 0);
+  will-change: transform, opacity;
+  transition: transform 0.05s linear, opacity 0.05s linear;
+}
+
+.hero-lede {
+  font-size: clamp(15.5px, 1.6vw, 18px);
+  line-height: 1.62;
+  color: #C8C4B8;
+  max-width: 580px;
+  margin: 0 0 28px;
+}
+
+/* INITIAL STATE IN CSS: SPECIFICATION STAGE IS COMPLETELY INVISIBLE ON LOAD */
+.hero-spec-stage {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(60px, 0, 0);
+  filter: blur(8px);
+  will-change: transform, opacity, filter;
+  transition: transform 0.05s linear, opacity 0.05s linear, filter 0.05s linear;
+}
+
+/* Scroll cue indicator */
+.hero-scroll-cue {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.hero-scroll-cue .cue-label {
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(196, 132, 61, 0.75);
+  font-weight: 600;
+}
+
+.hero-scroll-cue .cue-line {
+  width: 1px;
+  height: 18px;
+  background: linear-gradient(to bottom, var(--ochre), transparent);
+  animation: pulseCueLine 2.2s infinite ease-in-out;
+}
+
+@media (max-width: 960px) {
+  .hero-scroll-track {
+    height: auto;
+  }
+  .hero-sticky-stage {
+    position: relative;
+    height: auto;
+    padding: clamp(64px, 10vw, 96px) 0;
+  }
+  .hero-choreography {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .hero-display {
+    white-space: normal !important;
+    width: 100% !important;
+    transform: none !important;
+  }
+  .hero-subtext-stage,
+  .hero-spec-stage {
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    pointer-events: auto !important;
+  }
+  .hero-scroll-cue {
+    display: none;
+  }
+}
+
+
 /* ==========================================================================
-   Apple-Grade Kinetic Hero: Full-Width Right-to-Left Slide + Staggered Subtext Fade
+   Apple-Grade Kinetic Hero: Mathematically Dead-Centered Headline -> Left Slide
    ========================================================================== */
 
 .hero-scroll-track {
   position: relative;
-  height: 200vh; /* Smooth, luxurious scrub track */
+  height: 200vh; /* Generous, cinematic scrub track */
   background: #0A0C0A;
 }
 
@@ -4577,25 +4668,25 @@ footer .legal {
   position: relative;
   margin-bottom: 24px;
   width: 100%;
-  overflow: visible; /* Allows headline to stretch across full container width */
+  overflow: visible; /* Allows headline to stretch across container without clipping */
 }
 
 .hero-display {
   font-family: var(--serif);
   font-weight: 400;
   font-optical-sizing: auto;
-  font-size: clamp(36px, 4.4vw, 60px);
+  font-size: clamp(34px, 4.2vw, 56px);
   line-height: 1.12;
   letter-spacing: -0.025em;
   color: #F6F3EA;
   margin: 0;
-  white-space: nowrap; /* 2 grand sweeping lines */
+  white-space: nowrap; /* 2 majestic sweeping lines */
   width: max-content;
   will-change: transform;
   transform-origin: left center;
-  /* CSS initial position: pushed to the right across the container */
-  transform: translate3d(clamp(240px, 30vw, 440px), 0, 0);
-  transition: transform 0.05s linear;
+  /* Centering is calculated dynamically and applied by site.js */
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.04s linear;
 }
 
 .hero-display em {
@@ -4604,13 +4695,13 @@ footer .legal {
   color: var(--ochre);
 }
 
-/* INITIAL STATE IN CSS: SUBTEXT IS COMPLETELY INVISIBLE ON LOAD */
+/* HARDCODED INITIAL STATE IN CSS: SUBTEXT IS 100% INVISIBLE AT SCROLL 0 */
 .hero-subtext-stage {
   opacity: 0;
   pointer-events: none;
   transform: translate3d(0, 24px, 0);
   will-change: transform, opacity;
-  transition: transform 0.05s linear, opacity 0.05s linear;
+  transition: transform 0.04s linear, opacity 0.04s linear;
 }
 
 .hero-lede {
@@ -4621,14 +4712,14 @@ footer .legal {
   margin: 0 0 28px;
 }
 
-/* INITIAL STATE IN CSS: SPECIFICATION STAGE IS COMPLETELY INVISIBLE ON LOAD */
+/* HARDCODED INITIAL STATE IN CSS: SPECIFICATION TABLE IS 100% INVISIBLE AT SCROLL 0 */
 .hero-spec-stage {
   opacity: 0;
   pointer-events: none;
-  transform: translate3d(60px, 0, 0);
+  transform: translate3d(50px, 0, 0);
   filter: blur(8px);
   will-change: transform, opacity, filter;
-  transition: transform 0.05s linear, opacity 0.05s linear, filter 0.05s linear;
+  transition: transform 0.04s linear, opacity 0.04s linear, filter 0.04s linear;
 }
 
 /* Scroll cue indicator */
@@ -4641,7 +4732,7 @@ footer .legal {
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  opacity: 0.7;
+  opacity: 0.75;
   transition: opacity 0.3s ease;
   pointer-events: none;
   z-index: 5;
