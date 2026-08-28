@@ -3773,3 +3773,124 @@ footer .legal {
   /* Mobile-swap intent: on tablet, type first; portrait follows copy */
   .hero-plate { order: 0; }
 }
+
+
+/* ==========================================================================
+   Hero Specification Plate (Apple-Grade Architectural Instrument)
+   ========================================================================== */
+
+.hero-spec-card {
+  margin: 0;
+  position: relative;
+}
+
+.spec-card-inner {
+  position: relative;
+  background: rgba(18, 25, 20, 0.85);
+  border: 1px solid rgba(196, 132, 61, 0.3);
+  padding: 36px 32px 32px;
+  box-shadow: 0 32px 64px -16px rgba(0, 0, 0, 0.8), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.08),
+              0 0 0 1px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.spec-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(196, 132, 61, 0.2);
+  margin-bottom: 20px;
+}
+
+.spec-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ochre);
+  font-weight: 600;
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--ochre);
+  box-shadow: 0 0 8px var(--ochre);
+}
+
+.spec-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.spec-row {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(196, 132, 61, 0.12);
+  align-items: start;
+}
+
+.spec-row:last-child {
+  border-bottom: none;
+  padding-bottom: 8px;
+}
+
+.spec-idx {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ochre);
+  padding-top: 2px;
+  font-weight: 500;
+}
+
+.spec-body h3 {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: #F6F3EA;
+  margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
+
+.spec-body p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(246, 243, 234, 0.65);
+  margin: 0;
+}
+
+.spec-footer {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(196, 132, 61, 0.18);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.spec-footer .coord {
+  margin: 0;
+  font-size: 9.5px;
+  color: rgba(196, 132, 61, 0.75);
+}
+
+@media (max-width: 960px) {
+  .hero-obsidian-inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .spec-card-inner {
+    padding: 28px 24px 24px;
+  }
+}
