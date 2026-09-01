@@ -341,19 +341,28 @@
 /* ==========================================================================
    Apple-Grade Kinetic Hero Engine: True Dead-Center Headline -> Left Slide
    ========================================================================== */
-(function initCenteredKineticHero() {
+
+
+/* ==========================================================================
+   Apple-Grade Kinetic Hero Engine: Typographic Scale & Independent Centering
+   ========================================================================== */
+(function initKineticHero() {
   const track = document.querySelector('.hero-scroll-track');
   const container = document.querySelector('.hero-choreography');
   const h1 = document.querySelector('.hero-display');
+  const l1 = document.querySelector('.hl-1');
+  const l2 = document.querySelector('.hl-2');
   const subtextStage = document.querySelector('.hero-subtext-stage');
   const specStage = document.querySelector('.hero-spec-stage');
   const cue = document.querySelector('.hero-scroll-cue');
 
-  if (!track || !container || !h1 || !subtextStage || !specStage) return;
+  if (!track || !container || !h1 || !l1 || !l2 || !subtextStage || !specStage) return;
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) {
     h1.style.transform = 'none';
+    l1.style.transform = 'none';
+    l2.style.transform = 'none';
     subtextStage.style.opacity = '1';
     subtextStage.style.transform = 'none';
     subtextStage.style.pointerEvents = 'auto';
@@ -367,6 +376,8 @@
   function updateHeroChoreography() {
     if (window.innerWidth <= 960) {
       h1.style.transform = '';
+      l1.style.transform = '';
+      l2.style.transform = '';
       subtextStage.style.opacity = '';
       subtextStage.style.transform = '';
       subtextStage.style.pointerEvents = '';
@@ -381,40 +392,53 @@
     const totalDist = rect.height - window.innerHeight;
     if (totalDist <= 0) return;
 
-    // Current scrub progress from 0.0 (top) to 1.0 (bottom of hero track)
     const progress = Math.min(Math.max(-rect.top / totalDist, 0), 1);
 
-    // ── STAGE 1: HEADLINE STARTS MATHEMATICALLY DEAD-CENTER, SLIDES TO LEFT ANCHOR
-    // Dead-center offset: (Container Center) - (H1 Center)
+    // ── STAGE 1: TYPOGRAPHIC SCALE & INDEPENDENT LINE CENTERING
     const containerW = container.clientWidth;
-    const h1W = h1.clientWidth;
-    const deadCenterX = Math.max((containerW - h1W) / 2, 0);
+    const w1 = l1.clientWidth;
+    const w2 = l2.clientWidth;
 
-    // Slide happens over progress 0.0 -> 0.48
+    // Dynamically calculate startScale so the longest line doesn't overflow containerW too much.
+    // 1.35 is our massive target, but we gracefully degrade it down to 1.05 if needed to prevent wild bleeding.
+    const maxAllowedScale = containerW / Math.max(w2, 1);
+    const startScale = Math.min(1.35, Math.max(1.05, maxAllowedScale));
+
     const slideProgress = Math.min(progress / 0.48, 1);
-    // Smooth cubic bezier easing
-    const slideEase = slideProgress < 0.5
+    const ease = slideProgress < 0.5
       ? 2 * slideProgress * slideProgress
       : -1 + (4 - 2 * slideProgress) * slideProgress;
 
-    // At progress 0: translateX = deadCenterX (exact dead-center in container)
-    // At progress 1 (slide done): translateX = 0 (exact left anchor)
-    const currentX = deadCenterX * (1 - slideEase);
-    h1.style.transform = 'translate3d(' + currentX.toFixed(1) + 'px, 0, 0)';
+    // Scale wrapper from startScale down to 1.0
+    const currentScale = startScale - (startScale - 1) * ease;
+    h1.style.transform = 'scale(' + currentScale + ')';
 
-    // ── STAGE 2: SUBTEXT & SPEC TABLE FADE IN
-    // Starts as headline settles on the left (progress 0.40 -> 0.88)
+    // To visually center text within the scaled wrapper, we compute
+    // the virtual container width in unscaled pixels.
+    const virtualContainerW = containerW / currentScale;
+
+    // Center X offset for each line independently (true text-align: center effect)
+    // CRITICAL: We DO NOT clamp this to 0. If w2 > virtualContainerW, it must translate negatively
+    // to bleed equally off both sides. Clamping breaks the relative centering between lines.
+    const targetX1 = (virtualContainerW - w1) / 2;
+    const targetX2 = (virtualContainerW - w2) / 2;
+
+    // Interpolate from visually centered (targetX) to left-anchored (0)
+    const currentX1 = targetX1 * (1 - ease);
+    const currentX2 = targetX2 * (1 - ease);
+
+    l1.style.transform = 'translate3d(' + currentX1.toFixed(1) + 'px, 0, 0)';
+    l2.style.transform = 'translate3d(' + currentX2.toFixed(1) + 'px, 0, 0)';
+
+    // ── STAGE 2: SUBTEXT & SPEC TABLE FADE
     const fadeProgress = Math.min(Math.max((progress - 0.40) / 0.48, 0), 1);
-    // Smoothstep interpolation
     const fadeEase = fadeProgress * fadeProgress * (3 - 2 * fadeProgress);
 
-    // Subtext gently floats up 24px into place
     const subtextY = (1 - fadeEase) * 24;
     subtextStage.style.opacity = fadeEase.toFixed(3);
     subtextStage.style.transform = 'translate3d(0, ' + subtextY.toFixed(1) + 'px, 0)';
     subtextStage.style.pointerEvents = fadeProgress > 0.75 ? 'auto' : 'none';
 
-    // Specification Table glides in 45px from right, unblurs
     const tableX = (1 - fadeEase) * 45;
     const tableBlur = (1 - fadeEase) * 6;
     specStage.style.opacity = fadeEase.toFixed(3);
@@ -422,22 +446,29 @@
     specStage.style.filter = tableBlur > 0.1 ? 'blur(' + tableBlur.toFixed(1) + 'px)' : 'none';
     specStage.style.pointerEvents = fadeProgress > 0.75 ? 'auto' : 'none';
 
-    // Scroll cue fades out on initial scroll
     if (cue) {
       const cueOpacity = Math.max(0.75 - progress * 4, 0);
       cue.style.opacity = cueOpacity.toFixed(2);
     }
   }
 
-  // Bind scroll and resize
   window.addEventListener('scroll', function() {
     window.requestAnimationFrame(updateHeroChoreography);
   }, { passive: true });
-
   window.addEventListener('resize', function() {
     window.requestAnimationFrame(updateHeroChoreography);
   }, { passive: true });
 
-  // Execute immediately on load
-  updateHeroChoreography();
+  // CRITICAL: Ensure web fonts are fully loaded before calculating clientWidth.
+  // Measuring clientWidth on fallback fonts completely breaks the centering math.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function() {
+      updateHeroChoreography();
+      // Double check after a tiny delay in case of font rendering judder
+      setTimeout(updateHeroChoreography, 50);
+    });
+  } else {
+    updateHeroChoreography();
+    setTimeout(updateHeroChoreography, 100);
+  }
 })();

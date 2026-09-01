@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [2.1.0] - 2026-09-01
+
+### Added & Verified
+- **No Client Logos FAQ**: Integrated explicit FAQ accordion item on `index.html` and matching `FAQPage` JSON-LD schema explaining why corporate client rosters are never published (protected under identical legal rigor as clinical privacy).
+- **Regulatory Transparency**: Anchored `CRPO #17513` in the primary website footer colophon.
+- **Competitive Vendor Landscape Matrix**: Created `03_Strategy/Ernest_Vendor_Landscape_Matrix.md` capturing the 2×2 positioning scatter plot (Clinical Rigor vs. Risk Mitigation Focus).
+- **Figma Social Media System**: Documented editorial design system tokens (Fraunces + Public Sans + IBM Plex Mono, 1080×1350, spruce/ochre) in `05_Brand/Ernest_Care_Social_Templates_Figma_Spec.md`, enforcing strict evidence guardrails against unsourced stats.
+
+---
+
 ## [2.0.0] - 2026-08-27 (Ernest Care 2.0)
 
 ### Major Visual & Architectural Upgrade: Theatrical Executive Vault & Canopy
