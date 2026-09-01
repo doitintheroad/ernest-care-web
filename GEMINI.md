@@ -131,9 +131,7 @@ Nav matches scroll: Air-Gap · Programs · Board Kit · Evidence · FAQ.
 - **One booking URL sitewide:** `https://cal.com/daniel-cooper/30min`. Every booking control gets `js-booking`. Label: “Book a 20-minute briefing”.
 - **No micro-copy under primary buttons.** SLA credit lives on the tariff, not as needy subtext.
 - **No street addresses** in HTML, JSON-LD, or footers. `Toronto, Ontario` or `In-Person (Toronto) & Virtual (Ontario-Wide)`.
-- **No “Toronto, ON, Toronto”.**
-- **Regulatory & Governance Positioning:** Stage 1 clinical direction and health information custodianship are held by Daniel Cooper, RP (CRPO #17513). However, this credential is anchored strictly in the **governance / statutory layer** (Air-Gap Chamber 02, Vendor Diligence report, and footer disclaimer), never as a billboard on the front landing hero.
-- **Corporate & High-Stakes Fluency:** Explicitly position clinicians as possessing firsthand fluency in billables, high-stakes litigation, equity partnerships, and organizational pressure—not generic community therapy.
+- **Regulatory & Governance Positioning (Platform Masterbrand):** The public site (`index.html`) is branded strictly as an institutional B2B enterprise platform (*"Registered Psychotherapy Practice · College of Registered Psychotherapists of Ontario · Statutory Health Information Custodian under Ontario PHIPA, 2004"*). **Do NOT put Daniel Cooper's personal registration number (`CRPO #17513`) on the public landing page.** Individual clinician license numbers and named credentials are kept strictly inside private vendor diligence dossiers (`reports/vendor-diligence.html`), legal contracts, and signed proposals.
 - Language bans: absolute privilege, solicitor-client privilege, full clinical privilege, diagnostic capacity as an RP selling point, LIVE TELEMETRY, trainee-bashing that implies uniqueness in the CRPO 6.2 sense.
 
 Voice: direct, unsentimental, adult. Treat the person, not the title. No “healing journey”, “safe space”, “holding space”.
