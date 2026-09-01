@@ -459,16 +459,100 @@
     window.requestAnimationFrame(updateHeroChoreography);
   }, { passive: true });
 
-  // CRITICAL: Ensure web fonts are fully loaded before calculating clientWidth.
-  // Measuring clientWidth on fallback fonts completely breaks the centering math.
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(function() {
-      updateHeroChoreography();
-      // Double check after a tiny delay in case of font rendering judder
-      setTimeout(updateHeroChoreography, 50);
+  // ── EAP GAP DIAGNOSTIC INTERACTION ──
+  (function initDiagnostic() {
+    var diagCard = document.querySelector('.diagnostic-card');
+    if (!diagCard) return;
+
+    var answers = [null, null, null, null, null];
+    var scoreVal = document.getElementById('diag-score-val');
+    var scoreStatus = document.getElementById('diag-score-status');
+    var analysisP = document.getElementById('diag-analysis-p');
+    var emailForm = document.getElementById('diag-email-form');
+    var emailInput = document.getElementById('diag-email-input');
+    var emailConfirm = document.getElementById('diag-email-confirm');
+
+    var qRows = diagCard.querySelectorAll('.diagnostic-q-row');
+
+    qRows.forEach(function (row, idx) {
+      var btnYes = row.querySelector('.diag-btn-yes');
+      var btnNo = row.querySelector('.diag-btn-no');
+
+      if (btnYes && btnNo) {
+        btnYes.addEventListener('click', function () {
+          answers[idx] = true;
+          btnYes.classList.add('active-yes');
+          btnNo.classList.remove('active-no');
+          updateAuditScore();
+        });
+
+        btnNo.addEventListener('click', function () {
+          answers[idx] = false;
+          btnNo.classList.add('active-no');
+          btnYes.classList.remove('active-yes');
+          updateAuditScore();
+        });
+      }
     });
-  } else {
-    updateHeroChoreography();
-    setTimeout(updateHeroChoreography, 100);
-  }
+
+    function updateAuditScore() {
+      var answeredCount = 0;
+      var yesCount = 0;
+
+      answers.forEach(function (ans) {
+        if (ans !== null) {
+          answeredCount++;
+          if (ans === true) yesCount++;
+        }
+      });
+
+      if (answeredCount === 0) return;
+
+      var pct = Math.round((yesCount / 5) * 100);
+      if (scoreVal) scoreVal.textContent = pct + '%';
+
+      if (pct === 100) {
+        if (scoreStatus) {
+          scoreStatus.textContent = 'FULL CARVE-OUT STRUCTURE';
+          scoreStatus.style.color = '#7ADAA0';
+        }
+        if (analysisP) analysisP.textContent = 'Your organization has established robust executive clinical infrastructure with dedicated clinician access, rapid SLAs, and statutory data isolation.';
+      } else if (pct >= 60) {
+        if (scoreStatus) {
+          scoreStatus.textContent = 'MODERATE LEADERSHIP COVERAGE GAP';
+          scoreStatus.style.color = 'var(--ochre)';
+        }
+        if (analysisP) analysisP.textContent = 'Your current program covers general staff but leaves senior professionals vulnerable to intake delays, privacy hesitation, and token 3-session cutoffs.';
+      } else {
+        if (scoreStatus) {
+          scoreStatus.textContent = 'ACUTE LEADERSHIP RISK EXPOSURE';
+          scoreStatus.style.color = '#FF9B94';
+        }
+        if (analysisP) analysisP.textContent = 'Your senior cohort is operating with near-zero usable clinical support. Standard 1-800 triage creates unmanaged duty-of-care exposure under Ontario WSIA and OHSA standards.';
+      }
+    }
+
+    if (emailForm) {
+      emailForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var email = emailInput ? emailInput.value.trim() : '';
+        if (!email) return;
+
+        if (typeof gtag === 'function') {
+          gtag('event', 'generate_lead', {
+            event_category: 'engagement',
+            event_label: 'eap_gap_diagnostic',
+            value: email
+          });
+        }
+
+        emailForm.style.display = 'none';
+        if (emailConfirm) {
+          emailConfirm.style.display = 'block';
+          emailConfirm.textContent = 'Audit evaluation and Executive Board Memo dispatched to ' + email + '. You can also access the raw monograph below.';
+        }
+      });
+    }
+  })();
 })();
+

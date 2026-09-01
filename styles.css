@@ -5018,3 +5018,303 @@ footer .legal {
     padding-bottom: 0;
   }
 }
+
+/* ==========================================================================
+   Capital Preservation Dock & EAP Gap Diagnostic (C-Suite Hardening)
+   ========================================================================== */
+
+/* Capital Preservation Dock */
+.yield-dock {
+  margin-top: 40px;
+  background: rgba(22, 30, 25, 0.7);
+  border: 1px solid rgba(196, 132, 61, 0.25);
+  border-radius: 8px;
+  padding: 32px 28px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.yield-header {
+  margin-bottom: 24px;
+}
+
+.yield-header .coord {
+  color: var(--ochre);
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  margin-bottom: 4px;
+}
+
+.yield-header h3 {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.2vw, 24px);
+  color: #F6F3EA;
+  font-weight: 400;
+  margin: 0;
+}
+
+.yield-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.yield-cell {
+  border-right: 1px solid rgba(196, 132, 61, 0.15);
+  padding-right: 20px;
+}
+
+.yield-cell:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.yield-num {
+  display: block;
+  font-family: var(--serif);
+  font-size: clamp(26px, 2.8vw, 36px);
+  color: #F6F3EA;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.yield-cell-highlight .yield-num {
+  color: var(--ochre);
+}
+
+.yield-label {
+  display: block;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(246, 243, 234, 0.75);
+  margin-bottom: 6px;
+}
+
+.yield-desc {
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(246, 243, 234, 0.6);
+  margin: 0;
+}
+
+/* 5-Question EAP Gap Diagnostic Section */
+.diagnostic-section {
+  padding: clamp(64px, 8vw, 96px) 0;
+  background: #0E120F;
+  color: #F6F3EA;
+  position: relative;
+}
+
+.diagnostic-card {
+  max-width: 860px;
+  margin: 40px auto 0 auto;
+  background: rgba(21, 36, 29, 0.5);
+  border: 1px solid rgba(196, 132, 61, 0.25);
+  border-radius: 8px;
+  padding: clamp(24px, 4vw, 44px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.diagnostic-q-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.diagnostic-q-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 20px;
+  background: rgba(14, 18, 15, 0.6);
+  border: 1px solid rgba(246, 243, 234, 0.08);
+  border-radius: 6px;
+  transition: border-color 0.2s ease;
+}
+
+.diagnostic-q-row:hover {
+  border-color: rgba(196, 132, 61, 0.3);
+}
+
+.diagnostic-q-text {
+  font-family: var(--sans);
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: #F6F3EA;
+  margin: 0;
+}
+
+.diagnostic-q-text strong {
+  color: var(--brass-bright);
+  font-weight: 600;
+  display: block;
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.diagnostic-btn-group {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.diag-btn {
+  background: rgba(246, 243, 234, 0.06);
+  border: 1px solid rgba(246, 243, 234, 0.15);
+  color: rgba(246, 243, 234, 0.7);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.diag-btn:hover {
+  color: #FFF;
+  border-color: rgba(246, 243, 234, 0.35);
+}
+
+.diag-btn.active-yes {
+  background: var(--ochre);
+  color: #121312;
+  border-color: var(--ochre);
+  font-weight: 700;
+}
+
+.diag-btn.active-no {
+  background: rgba(196, 70, 61, 0.2);
+  color: #FF9B94;
+  border-color: rgba(196, 70, 61, 0.4);
+  font-weight: 700;
+}
+
+.diagnostic-result-dock {
+  background: rgba(14, 18, 15, 0.85);
+  border: 1px solid rgba(196, 132, 61, 0.3);
+  border-radius: 6px;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.diag-score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(246, 243, 234, 0.1);
+  padding-bottom: 16px;
+}
+
+.diag-score-val {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3.2vw, 38px);
+  color: var(--ochre);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.diag-score-status {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #F6F3EA;
+}
+
+.diag-analysis-p {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(246, 243, 234, 0.75);
+  margin: 0;
+}
+
+.diag-email-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.diag-email-input {
+  flex: 1;
+  background: rgba(246, 243, 234, 0.06);
+  border: 1px solid rgba(246, 243, 234, 0.2);
+  border-radius: 4px;
+  padding: 10px 16px;
+  color: #F6F3EA;
+  font-family: var(--sans);
+  font-size: 13.5px;
+}
+
+.diag-email-input:focus {
+  outline: none;
+  border-color: var(--ochre);
+  background: rgba(246, 243, 234, 0.09);
+}
+
+.diag-email-btn {
+  background: var(--ochre);
+  color: #121312;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 18px;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.diag-email-btn:hover {
+  opacity: 0.9;
+}
+
+.diag-email-confirm {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--brass-bright);
+  margin: 0;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .yield-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .yield-cell {
+    border-right: none;
+    border-bottom: 1px solid rgba(196, 132, 61, 0.15);
+    padding-right: 0;
+    padding-bottom: 16px;
+  }
+  .yield-cell:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .diagnostic-q-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .diag-email-form {
+    flex-direction: column;
+  }
+}
+
