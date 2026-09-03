@@ -4600,10 +4600,31 @@ footer .legal {
     padding: clamp(64px, 10vw, 96px) 0;
   }
   .hero-choreography {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 40px;
+    width: 100%;
+    max-width: 100%;
+  }
+  .hero-copy-stage,
+  .hero-h1-anchor {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+  .hero-display {
+    font-size: clamp(23px, 4.8vw, 38px);
+    line-height: 1.22;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
   }
   .hero-line {
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+    overflow-wrap: break-word;
+    word-break: normal;
     transform: none !important;
   }
   .hero-subtext-stage,
