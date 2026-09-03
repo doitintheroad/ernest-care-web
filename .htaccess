@@ -1,12 +1,21 @@
+DirectoryIndex index.html index.php
+
 RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^\.]+)$ $1.html [NC,L]
 
-ErrorDocument 404 /404.shtml
-
-
-# --- Security & Routing (2026-08-18) ---
-Options -Indexes
-
+# --- HTTPS Enforce ---
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# --- If file or directory exists, serve directly ---
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# --- Clean URL Rewrite (.html extension removal) ---
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f [OR]
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^/]+)/?$ $1.html [NC,L]
+
+# --- Error & Security ---
+ErrorDocument 404 /404.shtml
+Options -Indexes
