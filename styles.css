@@ -71,7 +71,7 @@ body {
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
 }
 
@@ -4451,219 +4451,13 @@ footer .legal {
   100% { transform: scaleY(0.4); opacity: 0.3; }
 }
 
-@media (max-width: 960px) {
-  .hero-scroll-track {
-    height: auto;
-  }
-  .hero-sticky-stage {
-    position: relative;
-    height: auto;
-    padding: clamp(64px, 10vw, 96px) 0;
-  }
-  .hero-choreography {
-    grid-template-columns: 1fr;
-    gap: 48px;
-  }
-  .hero-copy-stage,
-  .hero-spec-stage {
-    transform: none !important;
-    opacity: 1 !important;
-    filter: none !important;
-    max-width: 100%;
-  }
-  .hero-scroll-cue {
-    display: none;
-  }
-}
-
-/* Scroll cue indicator */
-.hero-scroll-cue {
-  position: absolute;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  opacity: 0.7;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  z-index: 5;
-}
-
-.hero-scroll-cue .cue-label {
-  font-family: var(--sans);
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(196, 132, 61, 0.75);
-  font-weight: 600;
-}
-
-.hero-scroll-cue .cue-line {
-  width: 1px;
-  height: 18px;
-  background: linear-gradient(to bottom, var(--ochre), transparent);
-  animation: pulseCueLine 2.2s infinite ease-in-out;
-}
-
-@media (max-width: 960px) {
-  .hero-scroll-track {
-    height: auto;
-  }
-  .hero-sticky-stage {
-    position: relative;
-    height: auto;
-    padding: clamp(64px, 10vw, 96px) 0;
-  }
-  .hero-choreography {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  
-.hero-line {
-  display: block;
-  width: max-content;
-  will-change: transform;
-}
-
-.hero-display {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-optical-sizing: auto;
-  font-size: clamp(34px, 4.2vw, 56px);
-  line-height: 1.12;
-  letter-spacing: -0.025em;
-  color: #F6F3EA;
-  margin: 0;
-  width: 100%;
-  will-change: transform;
-  transform-origin: left center;
-}
-  .hero-subtext-stage,
-  .hero-spec-stage {
-    transform: none !important;
-    opacity: 1 !important;
-    filter: none !important;
-    pointer-events: auto !important;
-  }
-  .hero-scroll-cue {
-    display: none;
-  }
-}
-
-/* INITIAL STATE IN CSS: SUBTEXT IS COMPLETELY INVISIBLE ON LOAD */
-.hero-subtext-stage {
-  opacity: 0;
-  pointer-events: none;
-  transform: translate3d(0, 24px, 0);
-  will-change: transform, opacity;
-  transition: transform 0.05s linear, opacity 0.05s linear;
-}
-
-.hero-lede {
-  font-size: clamp(15.5px, 1.6vw, 18px);
-  line-height: 1.62;
-  color: #C8C4B8;
-  max-width: 580px;
-  margin: 0 0 28px;
-}
-
-/* INITIAL STATE IN CSS: SPECIFICATION STAGE IS COMPLETELY INVISIBLE ON LOAD */
-.hero-spec-stage {
-  opacity: 0;
-  pointer-events: none;
-  transform: translate3d(60px, 0, 0);
-  filter: blur(8px);
-  will-change: transform, opacity, filter;
-  transition: transform 0.05s linear, opacity 0.05s linear, filter 0.05s linear;
-}
-
-/* Scroll cue indicator */
-.hero-scroll-cue {
-  position: absolute;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  opacity: 0.7;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  z-index: 5;
-}
-
-.hero-scroll-cue .cue-label {
-  font-family: var(--sans);
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(196, 132, 61, 0.75);
-  font-weight: 600;
-}
-
-.hero-scroll-cue .cue-line {
-  width: 1px;
-  height: 18px;
-  background: linear-gradient(to bottom, var(--ochre), transparent);
-  animation: pulseCueLine 2.2s infinite ease-in-out;
-}
-
-@media (max-width: 960px) {
-  .hero-scroll-track {
-    height: auto;
-  }
-  .hero-sticky-stage {
-    position: relative;
-    height: auto;
-    padding: clamp(64px, 10vw, 96px) 0;
-  }
-  .hero-choreography {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  
-.hero-line {
-  display: block;
-  width: max-content;
-  will-change: transform;
-}
-
-.hero-display {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-optical-sizing: auto;
-  font-size: clamp(34px, 4.2vw, 56px);
-  line-height: 1.12;
-  letter-spacing: -0.025em;
-  color: #F6F3EA;
-  margin: 0;
-  width: 100%;
-  will-change: transform;
-  transform-origin: left center;
-}
-  .hero-subtext-stage,
-  .hero-spec-stage {
-    transform: none !important;
-    opacity: 1 !important;
-    filter: none !important;
-    pointer-events: auto !important;
-  }
-  .hero-scroll-cue {
-    display: none;
-  }
-}
-
 /* ==========================================================================
-   Apple-Grade Kinetic Hero: Mathematically Dead-Centered Headline -> Left Slide
+   Kinetic Hero: Scroll-Driven Choreography & Reading Plateau
    ========================================================================== */
 
 .hero-scroll-track {
   position: relative;
-  height: 200vh; /* Generous, cinematic scrub track */
+  height: 280vh; /* 180vh scroll travel: opening hold -> glide -> reading plateau -> release */
   background: #0A0C0A;
 }
 
@@ -4708,14 +4502,7 @@ footer .legal {
   position: relative;
   margin-bottom: 24px;
   width: 100%;
-  overflow: visible; /* Allows headline to stretch across container without clipping */
-}
-
-
-.hero-line {
-  display: block;
-  width: max-content;
-  will-change: transform;
+  overflow: visible;
 }
 
 .hero-display {
@@ -4728,8 +4515,7 @@ footer .legal {
   color: #F6F3EA;
   margin: 0;
   width: 100%;
-  will-change: transform;
-  transform-origin: left center;
+  transform: none !important;
 }
 
 .hero-display em {
@@ -4738,7 +4524,14 @@ footer .legal {
   color: var(--ochre);
 }
 
-/* HARDCODED INITIAL STATE IN CSS: SUBTEXT IS 100% INVISIBLE AT SCROLL 0 */
+.hero-line {
+  display: block;
+  width: max-content;
+  will-change: transform;
+  transform-origin: left center;
+}
+
+/* INITIAL STATE: SUBTEXT IS 100% INVISIBLE ON LOAD */
 .hero-subtext-stage {
   opacity: 0;
   pointer-events: none;
@@ -4755,7 +4548,7 @@ footer .legal {
   margin: 0 0 28px;
 }
 
-/* HARDCODED INITIAL STATE IN CSS: SPECIFICATION TABLE IS 100% INVISIBLE AT SCROLL 0 */
+/* INITIAL STATE: SPECIFICATION TABLE IS 100% INVISIBLE ON LOAD */
 .hero-spec-stage {
   opacity: 0;
   pointer-events: none;
@@ -4810,26 +4603,9 @@ footer .legal {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  
-.hero-line {
-  display: block;
-  width: max-content;
-  will-change: transform;
-}
-
-.hero-display {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-optical-sizing: auto;
-  font-size: clamp(34px, 4.2vw, 56px);
-  line-height: 1.12;
-  letter-spacing: -0.025em;
-  color: #F6F3EA;
-  margin: 0;
-  width: 100%;
-  will-change: transform;
-  transform-origin: left center;
-}
+  .hero-line {
+    transform: none !important;
+  }
   .hero-subtext-stage,
   .hero-spec-stage {
     transform: none !important;

@@ -339,28 +339,21 @@
 
 
 /* ==========================================================================
-   Apple-Grade Kinetic Hero Engine: True Dead-Center Headline -> Left Slide
-   ========================================================================== */
-
-
-/* ==========================================================================
-   Apple-Grade Kinetic Hero Engine: Typographic Scale & Independent Centering
+   Apple-Grade Kinetic Hero Engine: Scroll Choreography & Reading Plateau
    ========================================================================== */
 (function initKineticHero() {
   const track = document.querySelector('.hero-scroll-track');
-  const container = document.querySelector('.hero-choreography');
-  const h1 = document.querySelector('.hero-display');
+  const anchor = document.querySelector('.hero-h1-anchor');
   const l1 = document.querySelector('.hl-1');
   const l2 = document.querySelector('.hl-2');
   const subtextStage = document.querySelector('.hero-subtext-stage');
   const specStage = document.querySelector('.hero-spec-stage');
   const cue = document.querySelector('.hero-scroll-cue');
 
-  if (!track || !container || !h1 || !l1 || !l2 || !subtextStage || !specStage) return;
+  if (!track || !anchor || !l1 || !l2 || !subtextStage || !specStage) return;
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) {
-    h1.style.transform = 'none';
     l1.style.transform = 'none';
     l2.style.transform = 'none';
     subtextStage.style.opacity = '1';
@@ -373,9 +366,17 @@
     return;
   }
 
-  function updateHeroChoreography() {
+  // Geometry cache
+  let anchorLeft = 0;
+  let screenCenter = 0;
+  let w1 = 0;
+  let w2 = 0;
+  let shift1 = 0;
+  let shift2 = 0;
+  const startScale = 1.15; // Subtle luxury expansion at rest
+
+  function measureGeometry() {
     if (window.innerWidth <= 960) {
-      h1.style.transform = '';
       l1.style.transform = '';
       l2.style.transform = '';
       subtextStage.style.opacity = '';
@@ -388,78 +389,123 @@
       return;
     }
 
+    // Temporarily clear transforms to measure true unscaled layout dimensions
+    const prevT1 = l1.style.transform;
+    const prevT2 = l2.style.transform;
+    l1.style.transform = 'none';
+    l2.style.transform = 'none';
+
+    const anchorRect = anchor.getBoundingClientRect();
+    anchorLeft = anchorRect.left;
+    screenCenter = window.innerWidth / 2;
+
+    w1 = l1.offsetWidth;
+    w2 = l2.offsetWidth;
+
+    // Restore transforms
+    l1.style.transform = prevT1;
+    l2.style.transform = prevT2;
+
+    // The shift required so each line's visual midpoint sits at screenCenter
+    // With transform-origin: left center:
+    // visual_left = anchorLeft + shift
+    // visual_width = w * startScale
+    // visual_center = visual_left + visual_width / 2 = screenCenter
+    // => shift = screenCenter - anchorLeft - (w * startScale) / 2
+    shift1 = screenCenter - anchorLeft - (w1 * startScale) / 2;
+    shift2 = screenCenter - anchorLeft - (w2 * startScale) / 2;
+  }
+
+  function updateHeroChoreography() {
+    if (window.innerWidth <= 960) return;
+
     const rect = track.getBoundingClientRect();
     const totalDist = rect.height - window.innerHeight;
     if (totalDist <= 0) return;
 
+    // Scrub progress from 0.0 to 1.0
     const progress = Math.min(Math.max(-rect.top / totalDist, 0), 1);
 
-    // ── STAGE 1: TYPOGRAPHIC SCALE & INDEPENDENT LINE CENTERING
-    const containerW = container.clientWidth;
-    const w1 = l1.clientWidth;
-    const w2 = l2.clientWidth;
+    // ── CHOREOGRAPHY PHASES ──
+    // Phase 1 (0.00 -> 0.08): Centered Opening Hold. Text sits dead-center.
+    // Phase 2 (0.08 -> 0.48): Kinetic Glide. Headline transitions from center to left anchor.
+    // Phase 3 (0.48 -> 0.88): Reading Plateau. 100% assembled, stable reading hold.
+    // Phase 4 (0.88 -> 1.00): Natural Release to next section.
 
-    // Dynamically calculate startScale so the longest line doesn't overflow containerW too much.
-    // 1.35 is our massive target, but we gracefully degrade it down to 1.05 if needed to prevent wild bleeding.
-    const maxAllowedScale = containerW / Math.max(w2, 1);
-    const startScale = Math.min(1.35, Math.max(1.05, maxAllowedScale));
+    let slideEase = 0;
+    if (progress <= 0.08) {
+      slideEase = 0;
+    } else if (progress >= 0.48) {
+      slideEase = 1;
+    } else {
+      const t = (progress - 0.08) / 0.40;
+      slideEase = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    }
 
-    const slideProgress = Math.min(progress / 0.48, 1);
-    const ease = slideProgress < 0.5
-      ? 2 * slideProgress * slideProgress
-      : -1 + (4 - 2 * slideProgress) * slideProgress;
+    // 1. Headline Motion (glide + scale down)
+    const currentScale = startScale - (startScale - 1) * slideEase;
+    const currentX1 = shift1 * (1 - slideEase);
+    const currentX2 = shift2 * (1 - slideEase);
 
-    // Scale wrapper from startScale down to 1.0
-    const currentScale = startScale - (startScale - 1) * ease;
-    h1.style.transform = 'scale(' + currentScale + ')';
+    l1.style.transform = 'translate3d(' + currentX1.toFixed(2) + 'px, 0, 0) scale(' + currentScale.toFixed(3) + ')';
+    l2.style.transform = 'translate3d(' + currentX2.toFixed(2) + 'px, 0, 0) scale(' + currentScale.toFixed(3) + ')';
 
-    // To visually center text within the scaled wrapper, we compute
-    // the virtual container width in unscaled pixels.
-    const virtualContainerW = containerW / currentScale;
+    // 2. Subtext & Specification Instrument Fade-in
+    // Starts as the headline nears the left anchor (progress 0.22 -> 0.48)
+    let fadeEase = 0;
+    if (progress <= 0.22) {
+      fadeEase = 0;
+    } else if (progress >= 0.48) {
+      fadeEase = 1;
+    } else {
+      const f = (progress - 0.22) / 0.26;
+      fadeEase = f * f * (3 - 2 * f);
+    }
 
-    // Center X offset for each line independently (true text-align: center effect)
-    // CRITICAL: We DO NOT clamp this to 0. If w2 > virtualContainerW, it must translate negatively
-    // to bleed equally off both sides. Clamping breaks the relative centering between lines.
-    const targetX1 = (virtualContainerW - w1) / 2;
-    const targetX2 = (virtualContainerW - w2) / 2;
-
-    // Interpolate from visually centered (targetX) to left-anchored (0)
-    const currentX1 = targetX1 * (1 - ease);
-    const currentX2 = targetX2 * (1 - ease);
-
-    l1.style.transform = 'translate3d(' + currentX1.toFixed(1) + 'px, 0, 0)';
-    l2.style.transform = 'translate3d(' + currentX2.toFixed(1) + 'px, 0, 0)';
-
-    // ── STAGE 2: SUBTEXT & SPEC TABLE FADE
-    const fadeProgress = Math.min(Math.max((progress - 0.40) / 0.48, 0), 1);
-    const fadeEase = fadeProgress * fadeProgress * (3 - 2 * fadeProgress);
-
-    const subtextY = (1 - fadeEase) * 24;
+    const subtextY = (1 - fadeEase) * 20;
     subtextStage.style.opacity = fadeEase.toFixed(3);
     subtextStage.style.transform = 'translate3d(0, ' + subtextY.toFixed(1) + 'px, 0)';
-    subtextStage.style.pointerEvents = fadeProgress > 0.75 ? 'auto' : 'none';
+    subtextStage.style.pointerEvents = fadeEase > 0.8 ? 'auto' : 'none';
 
-    const tableX = (1 - fadeEase) * 45;
+    const tableX = (1 - fadeEase) * 40;
     const tableBlur = (1 - fadeEase) * 6;
     specStage.style.opacity = fadeEase.toFixed(3);
     specStage.style.transform = 'translate3d(' + tableX.toFixed(1) + 'px, 0, 0)';
     specStage.style.filter = tableBlur > 0.1 ? 'blur(' + tableBlur.toFixed(1) + 'px)' : 'none';
-    specStage.style.pointerEvents = fadeProgress > 0.75 ? 'auto' : 'none';
+    specStage.style.pointerEvents = fadeEase > 0.8 ? 'auto' : 'none';
 
+    // 3. Scroll Cue
     if (cue) {
-      const cueOpacity = Math.max(0.75 - progress * 4, 0);
+      const cueOpacity = Math.max(0.75 - progress * 12, 0);
       cue.style.opacity = cueOpacity.toFixed(2);
     }
   }
 
+  // Window events
   window.addEventListener('scroll', function() {
     window.requestAnimationFrame(updateHeroChoreography);
   }, { passive: true });
+
   window.addEventListener('resize', function() {
+    measureGeometry();
     window.requestAnimationFrame(updateHeroChoreography);
   }, { passive: true });
 
-  // ── EAP GAP DIAGNOSTIC INTERACTION ──
+  // Initial measurement once typography is ready
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function() {
+      measureGeometry();
+      updateHeroChoreography();
+    });
+  } else {
+    setTimeout(function() {
+      measureGeometry();
+      updateHeroChoreography();
+    }, 60);
+  }
+})();
+
+// ── EAP GAP DIAGNOSTIC INTERACTION ──
   (function initDiagnostic() {
     var diagCard = document.querySelector('.diagnostic-card');
     if (!diagCard) return;
@@ -554,5 +600,4 @@
       });
     }
   })();
-})();
 
