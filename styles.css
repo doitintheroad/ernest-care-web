@@ -4986,6 +4986,14 @@ footer .legal {
   position: relative;
 }
 
+.diagnostic-section h2 {
+  color: #F6F3EA !important;
+}
+
+.diagnostic-section .coord {
+  color: var(--ochre) !important;
+}
+
 .diagnostic-card {
   max-width: 860px;
   margin: 40px auto 0 auto;
