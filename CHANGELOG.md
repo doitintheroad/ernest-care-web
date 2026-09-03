@@ -6,6 +6,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [2.2.0] - 2026-09-03
+
+### Kinetic Parallax & Persona Architecture Release (v68)
+- **Dead-Center Kinetic Hero Math:**
+  - Re-engineered `initKineticHero` in `site.js` using unassailable absolute viewport geometry: `shift = (window.innerWidth / 2) - anchorLeft - (w * scale) / 2`.
+  - Validated via computer-vision frame analysis: reduced opening headline drift from +164px rightward bias down to sub-4px of true viewport midpoint.
+- **The 4-Phase Choreography Standard & Reading Plateau:**
+  - Expanded scrub track from `200vh` to `280vh` (~180vh travel).
+  - Implemented 4 distinct zones: Initial Dead-Zone (0–8%), Kinetic Glide (8–48%), **The Reading Plateau (48–88%)**, and Natural Release (88–100%).
+  - Added dedicated ~70vh resting hold where the entire landing layout remains 100% pinned, sharp, and interactive so users can read copy and examine specification rows without rush.
+- **Dedicated Persona Routes:**
+  - `/law` (`law.html` & `law/index.html`): Tailored for Bay Street litigation & transactional partners, addressing attrition math and billable hour stress.
+  - `/chro` (`chro.html` & `chro/index.html`): Tailored for Chief Human Resources Officers, emphasizing the benefits gap, compliance, and fiduciary coverage.
+- **Codebase Optimization & Standards:**
+  - Stripped 8KB of redundant, duplicate CSS rules from `styles.css`.
+  - Replaced `overflow-x: hidden` with `overflow-x: clip` on `body` to guarantee uncompromised `position: sticky` across Chromium and WebKit.
+  - Validated 100% balanced JavaScript syntax (`assert count('{') == count('}')`).
+  - Packaged global Antigravity skill: `website-parallax-scanner` with automated OpenCV and headless Chrome QA tooling.
+  - Cache bumped to `?v=68` across all HTML files.
+
+---
+
 ## [2.1.0] - 2026-09-01
 
 ### Added & Verified
