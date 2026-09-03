@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="styles.css?v=69">
+<link rel="stylesheet" href="styles.css?v=70">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
 
@@ -183,79 +183,98 @@
           <span class="dock-v">Consolidated monthly bank billed like expert witness disbursements</span>
         </div>
       </div>
-      <!-- INTERACTIVE ATTRITION MODEL -->
-      <div class="calculator-card fade-up">
+      <!-- INTERACTIVE ATTRITION MODEL (SCROLL PARALLAX + HIGH CONTRAST) -->
+      <div class="calculator-card fade-up" id="preservation-calc">
         <div class="calculator-header">
-          <span class="coord" style="color: var(--ochre);">INTERACTIVE ATTRITION MODEL</span>
-          <h3 style="font-family: var(--serif); font-size: clamp(22px, 2.2vw, 26px); font-weight: 400; color: #F6F3EA; margin: 6px 0 10px;">The Partner Preservation Yield</h3>
-          <p style="font-size: 13.5px; color: rgba(246, 243, 234, 0.7); margin: 0 0 28px;">Adjust your partnership size and average billing rate to model the capital preservation ratio of an executive clinical carve-out.</p>
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <span class="coord" style="color: var(--ochre);">INTERACTIVE ATTRITION MODEL</span>
+            <div class="calc-mode-indicator" id="calc-indicator">
+              <span class="calc-mode-pulse"></span>
+              <span id="calc-indicator-text">Scroll Parallax Dynamic Simulation</span>
+            </div>
+          </div>
+          <h3 style="font-family: var(--serif); font-size: clamp(22px, 2.2vw, 26px); font-weight: 400; color: #F6F3EA; margin: 8px 0 10px;">The Partner Preservation Yield</h3>
+          <p style="font-size: 13.5px; color: rgba(246, 243, 234, 0.7); margin: 0 0 28px;">Scroll past to see the model scale dynamically, or manually adjust partnership cohort and hourly rates.</p>
         </div>
         
-        <div class="calc-controls-grid">
-          <div class="calc-control-group">
-            <div class="calc-label-row">
-              <label for="slider-partners" class="calc-label">Partners &amp; Senior Litigators</label>
-              <span class="calc-val-badge" id="val-partners">15</span>
-            </div>
-            <input type="range" id="slider-partners" min="5" max="50" step="1" value="15" class="calc-slider" aria-label="Number of Partners">
-            <div class="calc-range-marks">
-              <span>5</span>
-              <span>25</span>
-              <span>50</span>
-            </div>
+        <div class="calc-with-gauge">
+          <!-- Vertical Capillary Risk Gauge -->
+          <div class="calc-vertical-gauge" aria-hidden="true" title="Firm Exposure Meter">
+            <div class="calc-gauge-fluid" id="calc-gauge-fluid"></div>
           </div>
 
-          <div class="calc-control-group">
-            <div class="calc-label-row">
-              <label for="slider-rate" class="calc-label">Average Hourly Billing Rate</label>
-              <span class="calc-val-badge" id="val-rate">$650/hr</span>
+          <div>
+            <div class="calc-controls-grid">
+              <div class="calc-control-group">
+                <div class="calc-label-row">
+                  <label for="slider-partners" class="calc-label">Partners &amp; Senior Litigators</label>
+                  <span class="calc-val-badge" id="val-partners">15</span>
+                </div>
+                <input type="range" id="slider-partners" min="5" max="50" step="1" value="15" class="calc-slider" aria-label="Number of Partners">
+                <div class="calc-range-marks">
+                  <span>5</span>
+                  <span>25</span>
+                  <span>50</span>
+                </div>
+              </div>
+
+              <div class="calc-control-group">
+                <div class="calc-label-row">
+                  <label for="slider-rate" class="calc-label">Average Hourly Billing Rate</label>
+                  <span class="calc-val-badge" id="val-rate">$650/hr</span>
+                </div>
+                <input type="range" id="slider-rate" min="400" max="1200" step="25" value="650" class="calc-slider" aria-label="Hourly Billing Rate">
+                <div class="calc-range-marks">
+                  <span>$400</span>
+                  <span>$800</span>
+                  <span>$1,200</span>
+                </div>
+              </div>
             </div>
-            <input type="range" id="slider-rate" min="400" max="1200" step="25" value="650" class="calc-slider" aria-label="Hourly Billing Rate">
-            <div class="calc-range-marks">
-              <span>$400</span>
-              <span>$800</span>
-              <span>$1,200</span>
+
+            <div class="calc-results-dock">
+              <div class="calc-stat-cell">
+                <span class="calc-stat-k">Annual Billables Book</span>
+                <strong class="calc-stat-v" id="res-book">$17.5M</strong>
+                <span class="calc-stat-sub">1,800 hrs/yr &times; cohort</span>
+              </div>
+              <div class="calc-stat-cell">
+                <span class="calc-stat-k" style="color: #FF9B94;">Single Partner Departure Loss</span>
+                <strong class="calc-stat-v calc-loss-badge" id="res-loss">$520,000</strong>
+                <span class="calc-bleed-ticker" id="res-bleed">~$2,880 capital bleed/day</span>
+              </div>
+              <div class="calc-stat-cell calc-stat-highlight">
+                <span class="calc-stat-k" style="color: #FFB340;">Annual Retainer Coverage</span>
+                <strong class="calc-stat-v calc-roi-badge" id="res-roi">19.7&times;</strong>
+                <span class="calc-stat-sub">Net yield on Ernest Core ($26.4k/yr)</span>
+              </div>
             </div>
+
+            <p class="calc-disclaimer">Model assumes conservative 800 unbilled lateral ramp hours and standard legal search placement fees. Retaining just one partner over a 4-year period covers the entire firm's clinical carve-out nearly twenty times over.</p>
           </div>
         </div>
-
-        <div class="calc-results-dock">
-          <div class="calc-stat-cell">
-            <span class="calc-stat-k">Annual Billables Book</span>
-            <strong class="calc-stat-v" id="res-book">$17.5M</strong>
-            <span class="calc-stat-sub">1,800 hrs/yr &times; cohort</span>
-          </div>
-          <div class="calc-stat-cell">
-            <span class="calc-stat-k">Single Partner Departure Loss</span>
-            <strong class="calc-stat-v" id="res-loss">$520,000</strong>
-            <span class="calc-stat-sub">Search fee + 800 unbilled hrs</span>
-          </div>
-          <div class="calc-stat-cell calc-stat-highlight">
-            <span class="calc-stat-k">Annual Retainer Coverage</span>
-            <strong class="calc-stat-v calc-roi-badge" id="res-roi">19.7&times;</strong>
-            <span class="calc-stat-sub">Net yield on Ernest Core ($26.4k/yr)</span>
-          </div>
-        </div>
-
-        <p class="calc-disclaimer">Model assumes conservative 800 unbilled lateral ramp hours and standard legal search placement fees. Retaining just one partner over a 4-year period covers the entire firm's clinical carve-out nearly twenty times over.</p>
       </div>
 
       <script>
         (function() {
+          const card = document.getElementById('preservation-calc');
           const sPartners = document.getElementById('slider-partners');
           const sRate = document.getElementById('slider-rate');
           const vPartners = document.getElementById('val-partners');
           const vRate = document.getElementById('val-rate');
           const rBook = document.getElementById('res-book');
           const rLoss = document.getElementById('res-loss');
+          const rBleed = document.getElementById('res-bleed');
           const rRoi = document.getElementById('res-roi');
+          const gaugeFluid = document.getElementById('calc-gauge-fluid');
+          const indicatorText = document.getElementById('calc-indicator-text');
 
-          if (!sPartners || !sRate) return;
+          if (!card || !sPartners || !sRate) return;
 
-          function updateCalc() {
-            const partners = parseInt(sPartners.value, 10);
-            const rate = parseInt(sRate.value, 10);
+          let isManual = false;
+          let manualTimer = null;
 
+          function updateCalc(partners, rate, scrollRatio) {
             vPartners.textContent = partners;
             vRate.textContent = '$' + rate + '/hr';
 
@@ -265,23 +284,70 @@
             rBook.textContent = '$' + bookFormatted;
 
             // Single Partner Departure Loss:
-            // Estimated compensation = rate * 600
-            // Search fee = 25% of compensation
-            // Lost billing during ramp = 800 hrs * (rate * 0.7 profit/cost contribution)
             const searchFee = rate * 150; 
             const unbilledLoss = 800 * (rate * 0.65);
             const totalLoss = Math.round(searchFee + unbilledLoss);
             rLoss.textContent = '$' + totalLoss.toLocaleString();
 
+            // Daily capital bleed during 6-month ramp (~125 working days)
+            const dailyBleed = Math.round(unbilledLoss / 125);
+            if (rBleed) rBleed.textContent = '~$' + dailyBleed.toLocaleString() + ' capital bleed/day';
+
             // Ernest Core Retainer = $26,400 / yr
             const retainer = 26400;
             const roiMultiplier = (totalLoss / retainer).toFixed(1);
             rRoi.textContent = roiMultiplier + 'x';
+
+            // Fluid gauge height (15% to 92%)
+            if (gaugeFluid) {
+              const ratio = (typeof scrollRatio === 'number') 
+                ? scrollRatio 
+                : ((partners - 5) / 45 * 0.5 + (rate - 400) / 800 * 0.5);
+              const heightPct = Math.round(15 + Math.min(Math.max(ratio, 0), 1) * 75);
+              gaugeFluid.style.height = heightPct + '%';
+            }
           }
 
-          sPartners.addEventListener('input', updateCalc);
-          sRate.addEventListener('input', updateCalc);
-          updateCalc();
+          function onManualInput() {
+            isManual = true;
+            if (indicatorText) indicatorText.textContent = 'Manual Interactive Mode';
+            if (manualTimer) clearTimeout(manualTimer);
+            manualTimer = setTimeout(function() {
+              isManual = false;
+              if (indicatorText) indicatorText.textContent = 'Scroll Parallax Dynamic Simulation';
+            }, 6000);
+
+            updateCalc(parseInt(sPartners.value, 10), parseInt(sRate.value, 10));
+          }
+
+          sPartners.addEventListener('input', onManualInput);
+          sRate.addEventListener('input', onManualInput);
+
+          // Scroll Parallax Listener
+          function onScrollParallax() {
+            if (isManual) return;
+            const rect = card.getBoundingClientRect();
+            const winH = window.innerHeight;
+
+            // Trigger when card is in view
+            if (rect.bottom < 0 || rect.top > winH) return;
+
+            // Progress: 0 when top enters viewport bottom, 1 when bottom exits viewport top
+            const progress = Math.min(Math.max((winH - rect.top) / (winH + rect.height), 0), 1);
+
+            // Interpolate partners: 10 to 30
+            const p = Math.round(10 + progress * 20);
+            // Interpolate rate: $500 to $950
+            const r = Math.round(500 + progress * 450);
+
+            sPartners.value = p;
+            sRate.value = r;
+
+            updateCalc(p, r, progress);
+          }
+
+          window.addEventListener('scroll', onScrollParallax, { passive: true });
+          updateCalc(15, 650, 0.35);
         })();
       </script>
 
@@ -494,6 +560,6 @@
   </div>
 </footer>
 
-<script src="site.js?v=69" defer></script>
+<script src="site.js?v=70" defer></script>
 </body>
 </html>
